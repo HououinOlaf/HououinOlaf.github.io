@@ -1,10 +1,16 @@
 // 1. RELOJ ESTILO NIXIE
 function updateClock() {
     const now = new Date();
-    let h = now.getHours().toString().padStart(2, '0');
+    let h = now.getHours();
     let m = now.getMinutes().toString().padStart(2, '0');
     let s = now.getSeconds().toString().padStart(2, '0');
-    document.getElementById('clock').innerText = `${h}:${m}:${s}`;
+    
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12;
+    h = h ? h : 12; // Si h es 0, mostrar 12
+    h = h.toString().padStart(2, '0');
+    
+    document.getElementById('clock').innerText = `${h}:${m}:${s} ${ampm}`;
 }
 setInterval(updateClock, 1000);
 updateClock();
