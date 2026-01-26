@@ -1,29 +1,34 @@
+// 1. RELOJ ESTILO NIXIE
 function updateClock() {
-    const clockElement = document.getElementById('clock');
     const now = new Date();
-    
-    let hours = now.getHours();
-    let minutes = now.getMinutes();
-    let seconds = now.getSeconds();
-    let ampm = hours >= 12 ? 'PM' : 'AM';
-
-    // Convertir a formato 12 horas
-    hours = hours % 12;
-    hours = hours ? hours : 12; // El 0 debe ser 12
-
-    // Añadir ceros a la izquierda si es necesario
-    hours = hours < 10 ? '0' + hours : hours;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    seconds = seconds < 10 ? '0' + seconds : seconds;
-
-    const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
-    clockElement.innerText = timeString;
+    let h = now.getHours().toString().padStart(2, '0');
+    let m = now.getMinutes().toString().padStart(2, '0');
+    let s = now.getSeconds().toString().padStart(2, '0');
+    document.getElementById('clock').innerText = `${h}:${m}:${s}`;
 }
-
-// Actualizar cada segundo
 setInterval(updateClock, 1000);
-
-// Ejecutar inmediatamente al cargar
 updateClock();
 
-console.log("%c SYSTEM READY ", "background: #33ff33; color: #000; font-weight: bold;");
+// 2. SIMULACIÓN DE FORMULARIO Y AUTORESPUESTA
+document.getElementById('contactForm').addEventListener('submit', function(e) {    
+    // Simulación visual de "Autorespuesta"
+    const statusMsg = document.getElementById('form-status');
+    const btn = document.querySelector('.cyber-btn');
+    
+    btn.innerHTML = "ENVIANDO PAQUETES...";
+    btn.style.opacity = "0.7";
+    
+    // Simulamos un retraso de red
+    setTimeout(() => {
+        statusMsg.style.display = "block";
+        statusMsg.innerHTML = "> [SISTEMA]: MENSAJE RECIBIDO.<br>> [AUTO-REPLY]: Hemos recibido su solicitud. Protocolo de respuesta iniciado.";
+        btn.innerHTML = "TRANSMISIÓN COMPLETADA";
+        btn.style.background = "#333";
+        btn.disabled = true;
+        
+        // Limpiar formulario
+        document.getElementById('contactForm').reset();
+    }, 1500);
+});
+
+console.log("SYSTEM SECURE... HTTPS ENABLED.");
