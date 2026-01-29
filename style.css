@@ -200,6 +200,50 @@ footer {
     border-radius: 3px;
 }
 
+/* Estilos para la sección del juego embebido */
+.game-section{
+    text-align: center;
+    margin: 40px 0;
+    padding: 0 12px;
+}
+.game-section h2{
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    color: var(--terminal-green);
+    margin-bottom: 14px;
+    line-height: 1.25;
+    border-bottom: none;
+}
+.game-wrapper{
+    display: flex;
+    justify-content: center;
+}
+.game-card{
+    width: 86%;
+    max-width: 980px;
+    background: rgba(20,20,20,0.65);
+    border-left: 3px solid var(--nixie-glow);
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+}
+.game-card iframe{
+    width: 100%;
+    height: 600px;
+    border: 0;
+    display: block;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 800px){
+    .game-card iframe{ height: 520px; }
+    .game-section h2{ font-size: 0.95rem; }
+}
+@media (max-width: 480px){
+    .game-card iframe{ height: 420px; }
+    .game-card{ padding: 8px; }
+}
+
 @media (max-width: 600px) {
     .header-top { flex-direction: column; }
     .nixie-wrapper { margin-top: 20px; width: 100%; text-align: center; }
