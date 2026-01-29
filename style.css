@@ -234,7 +234,20 @@ footer {
     display: block;
 }
 
-/* Ajustes responsivos */
+/* Controles del juego */
+.game-controls{
+    margin-top: 12px;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    text-align: center;
+    border-top: 1px dashed rgba(255,255,255,0.04);
+    padding-top: 10px;
+}
+.game-controls p{
+    margin: 6px 0;
+    color: var(--terminal-green);
+    font-family: 'Share Tech Mono', monospace;
+}
 @media (max-width: 800px){
     .game-card iframe{ height: 520px; }
     .game-section h2{ font-size: 0.95rem; }
@@ -242,6 +255,7 @@ footer {
 @media (max-width: 480px){
     .game-card iframe{ height: 420px; }
     .game-card{ padding: 8px; }
+    .game-controls{ font-size: 0.9rem; }
 }
 
 @media (max-width: 600px) {
