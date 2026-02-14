@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 2 | CNO V</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <div class="container">
+        
+        <header>
+            <div class="header-top">
+                <div class="user-info">
+                    <h1 class="glitch" data-text="ACTIVIDAD 02: ESCENARIOS">ACTIVIDAD 02: ESCENARIOS</h1>
+                    <p class="subtitle">> MATERIA: <span class="highlight">SEGURIDAD INFORMÁTICA</span></p>
+                    <p class="subtitle">> ALUMNO: [Coronado Noriega Jesús Olaf - 178991]</p>
+                </div>
+                <div style="text-align: right; min-width: 150px;">
+                    <a href="actividades.html" class="cyber-btn" style="font-size: 0.8rem;">
+                        << VOLVER A LISTA
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="178991-Act02.pdf" download class="cyber-btn" style="display: inline-block; width: auto; max-width: 90%; padding: 15px 40px; font-size: 1.1rem; border-width: 2px;">
+                <i class="fas fa-file-pdf"></i> [ DESCARGAR PDF ORIGINAL ]
+            </a>
+        </div>
+        <section class="panel">
+            <h2><span class="prefix">#</span> 01_MATRIZ_DE_AMENAZAS_Y_CONTROLES</h2>
+            <div class="terminal-box">
+                <p>> ANÁLISIS DE RIESGOS BASADO EN RFC 4949 Y SERVICIOS X.800</p>
+            </div>
+
+            <div class="table-responsive">
+                <table class="cyber-table">
+                    <thead>
+                        <tr>
+                            <th>ESCENARIO</th>
+                            <th>SERVICIOS X.800 COMPROMETIDOS</th>
+                            <th>DEFINICIÓN RFC 4949</th>
+                            <th>TIPO DE AMENAZA</th>
+                            <th>CONTROL RECOMENDADO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>01 (LockBit)</td>
+                            [cite_start]<td>Confidencialidad, Integridad, Disponibilidad [cite: 119]</td>
+                            <td>Multi-stage attack, Data breach</td>
+                            <td>Externa (Cibercrimen)</td>
+                            <td>Respaldos inmutables y EDR.</td>
+                        </tr>
+                        <tr>
+                            <td>02 (Nube)</td>
+                            [cite_start]<td>Control de acceso, Confidencialidad [cite: 119]</td>
+                            <td>Misconfiguration, Exposure</td>
+                            <td>Interna (Error)</td>
+                            <td>Auditoría CSPM y políticas IAM.</td>
+                        </tr>
+                        <tr>
+                            <td>03 (Supply)</td>
+                            [cite_start]<td>Integridad, Confidencialidad [cite: 119]</td>
+                            <td>Supply chain attack</td>
+                            <td>Externa (Terceros)</td>
+                            <td>Firmas digitales y análisis SBOM.</td>
+                        </tr>
+                        <tr>
+                            <td>04 (Phishing)</td>
+                            [cite_start]<td>Autenticación, Control de acceso [cite: 119]</td>
+                            <td>Credential compromise</td>
+                            <td>Externa (Ingeniería Social)</td>
+                            <td>MFA y concientización.</td>
+                        </tr>
+                        <tr>
+                            <td>05 (Backups)</td>
+                            [cite_start]<td>Disponibilidad, Integridad [cite: 119]</td>
+                            <td>Data destruction, Availability attack</td>
+                            <td>Externa (Sabotaje)</td>
+                            <td>Copias offline (Regla 3-2-1).</td>
+                        </tr>
+                        <tr>
+                            <td>06 (Insider)</td>
+                            [cite_start]<td>Confidencialidad, Control de acceso [cite: 119]</td>
+                            <td>Insider threat</td>
+                            <td>Interna (Maliciosa)</td>
+                            <td>DLP y Mínimo Privilegio.</td>
+                        </tr>
+                        <tr>
+                            <td>07 (Logs)</td>
+                            [cite_start]<td>Integridad, No repudio [cite: 119]</td>
+                            <td>Audit trail violation</td>
+                            <td>Mixta (Ocultamiento)</td>
+                            <td>SIEM y Logs inalterables.</td>
+                        </tr>
+                        <tr>
+                            <td>08 (Fallo)</td>
+                            [cite_start]<td>Disponibilidad [cite: 119]</td>
+                            <td>Operational failure</td>
+                            <td>Interna (Proceso)</td>
+                            <td>Entornos de Staging y Rollback.</td>
+                        </tr>
+                        <tr>
+                            <td>09 (Masq.)</td>
+                            [cite_start]<td>Autenticación, Confidencialidad [cite: 119]</td>
+                            <td>Masquerade, Phishing</td>
+                            <td>Externa (Suplantación)</td>
+                            <td>DMARC y certificados SSL/TLS.</td>
+                        </tr>
+                        <tr>
+                            <td>10 (Destr.)</td>
+                            [cite_start]<td>Confidencialidad, Integridad, Disponibilidad [cite: 119]</td>
+                            <td>Destructive attack</td>
+                            <td>Externa (Ataque total)</td>
+                            <td>Respuesta a Incidentes (IRP).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <div class="ssl-badge">
+                    <i class="fas fa-lock"></i> DATOS ENCRIPTADOS
+                </div>
+                <p class="copyright">
+                    © 2026 [Hououin] | CNO V SEGURIDAD INFORMÁTICA
+                </p>
+            </div>
+        </footer>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

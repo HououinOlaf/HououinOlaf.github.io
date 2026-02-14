@@ -38,3 +38,27 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
 });
 
 console.log("SYSTEM SECURE... HTTPS ENABLED.");
+
+// --- AGREGAR AL FINAL DE script.js ---
+
+// 3. LOGICA DE PESTANAS (TABS)
+function openParcial(evt, parcialName) {
+    // Declarar variables
+    var i, tabcontent, tablinks;
+
+    // Ocultar todo el contenido con clase "tab-content"
+    tabcontent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Quitar la clase "active" de todos los botones
+    tablinks = document.getElementsByClassName("tab-link");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Mostrar el parcial actual y agregar clase "active" al boton presionado
+    document.getElementById(parcialName).style.display = "block";
+    evt.currentTarget.className += " active";
+}

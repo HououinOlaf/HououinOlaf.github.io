@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 4: Script Firewall | CNO V</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <div class="container">
+        
+        <header>
+            <div class="header-top">
+                <div class="user-info">
+                    <h1 class="glitch" data-text="ACT.04: REGLAS DE FIREWALL">ACT.04: REGLAS DE FIREWALL</h1>
+                    <p class="subtitle">> TEMA: <span class="highlight">SCRIPTING & SEGURIDAD PERIMETRAL</span></p>
+                    <p class="subtitle">> ALUMNO: [Coronado Noriega Jesús Olaf - 178991]</p>
+                </div>
+                <div style="text-align: right; min-width: 150px;">
+                    <a href="actividades.html" class="cyber-btn" style="font-size: 0.8rem;">
+                        << VOLVER A LISTA
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="178991-act4.pdf" download class="cyber-btn" style="display: inline-block; width: auto; max-width: 90%; padding: 15px 40px; font-size: 1.1rem; border-width: 2px;">
+                <i class="fas fa-file-pdf"></i> [ DESCARGAR PDF ORIGINAL ]
+            </a>
+        </div>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 01_OBJETIVO_DEL_DESPLIEGUE</h2>
+            <div class="content-box">
+                <p>El siguiente conjunto de instrucciones representa una configuración básica de <strong>Hardening</strong> para un servidor Linux. El objetivo es minimizar la superficie de ataque controlando estrictamente el tráfico entrante y saliente.</p>
+                <ul class="binary-list">
+                    <li>> <strong>Política por Defecto:</strong> Se aplica un enfoque de "Denegar todo" (DROP) para garantizar que solo pase lo explícitamente permitido.</li>
+                    <li>> <strong>Stateful Inspection:</strong> Se utilizan módulos de estado para permitir respuestas a conexiones ya establecidas.</li>
+                    <li>> <strong>Servicios Críticos:</strong> Se habilitan puertos específicos para DNS, SMTP (Correo) y HTTP (Web).</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 02_SECUENCIA_DE_COMANDOS</h2>
+            
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span style="margin-left: 10px;">root@servidor: /etc/iptables</span>
+                </div>
+                <div class="terminal-body">
+                    <span class="comment"># 1. Establecer política restrictiva por defecto (Bloquear entrada)</span>
+                    <span class="prompt">root@server:~#</span>
+                    <span class="command">iptables -P INPUT DROP</span>
+                </div>
+            </div>
+
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span style="margin-left: 10px;">root@servidor: /etc/iptables</span>
+                </div>
+                <div class="terminal-body">
+                    <span class="comment"># 2. Permitir reenvío de paquetes de conexiones ya establecidas</span>
+                    <span class="prompt">root@server:~#</span>
+                    <span class="command">iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT</span>
+                </div>
+            </div>
+
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span style="margin-left: 10px;">root@servidor: /etc/iptables</span>
+                </div>
+                <div class="terminal-body">
+                    <span class="comment"># 3. Permitir tráfico de salida DNS (TCP Puerto 53)</span>
+                    <span class="prompt">root@server:~#</span>
+                    <span class="command">iptables -A OUTPUT -p tcp --dport 53 -m state --state NEW -j ACCEPT</span>
+                </div>
+            </div>
+
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span style="margin-left: 10px;">root@servidor: /etc/iptables</span>
+                </div>
+                <div class="terminal-body">
+                    <span class="comment"># 4. Permitir tráfico SMTP entrante (Correo - Puerto 25)</span>
+                    <span class="prompt">root@server:~#</span>
+                    <span class="command">iptables -A INPUT -p tcp --dport 25 -m state --state NEW -j ACCEPT</span>
+                    <br><br>
+                    <span class="comment"># 5. Permitir tráfico SMTP saliente (Correo - Puerto 25)</span>
+                    <span class="prompt">root@server:~#</span>
+                    <span class="command">iptables -A OUTPUT -p tcp --dport 25 -m state --state NEW -j ACCEPT</span>
+                </div>
+            </div>
+
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span style="margin-left: 10px;">root@servidor: /etc/iptables</span>
+                </div>
+                <div class="terminal-body">
+                    <span class="comment"># 6. Permitir tráfico HTTP Web entrante (Puerto 80)</span>
+                    <span class="prompt">root@server:~#</span>
+                    <span class="command">iptables -A INPUT -p tcp --dport 80 -m state --state NEW -j ACCEPT</span>
+                    <br><br>
+                    <span class="comment"># 7. Regla redundante/adicional para HTTP (Según reporte)</span>
+                    <span class="prompt">root@server:~#</span>
+                    <span class="command">iptables -A INPUT -p tcp --dport 80 -m state --state NEW -j ACCEPT</span>
+                </div>
+            </div>
+
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <div class="ssl-badge">
+                    <i class="fas fa-lock"></i> DATOS ENCRIPTADOS
+                </div>
+            <div class="footer-content">
+                <p class="copyright">
+                    © 2026 [Hououin] | CNO V SEGURIDAD INFORMÁTICA
+                </p>
+            </div>
+        </footer>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

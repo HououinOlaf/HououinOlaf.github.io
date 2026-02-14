@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caso Equifax | CNO V</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <div class="container">
+        
+        <header>
+            <div class="header-top">
+                <div class="user-info">
+                    <h1 class="glitch" data-text="REPORTE TÉCNICO: EQUIFAX">REPORTE TÉCNICO: EQUIFAX</h1>
+                    <p class="subtitle">> MATERIA: <span class="highlight">SEGURIDAD INFORMÁTICA</span></p>
+                    <p class="subtitle">> EQUIPO: [05] | FECHA: [2026-01-30]</p>
+                </div>
+                <div style="text-align: right; min-width: 150px;">
+                    <a href="actividades.html" class="cyber-btn" style="font-size: 0.8rem;">
+                        << VOLVER A LISTA
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="act01-Equipo5.pdf" download class="cyber-btn" style="display: inline-block; width: auto; max-width: 90%; padding: 15px 40px; font-size: 1.1rem; border-width: 2px;">
+                <i class="fas fa-file-pdf"></i> [ DESCARGAR PDF ORIGINAL ]
+            </a>
+        </div>
+        <section class="panel">
+            <div class="terminal-box">
+                <h3>// INTEGRANTES_DEL_EQUIPO</h3>
+                <div class="grid-2">
+                    <ul class="binary-list">
+                        <li>> Coronado Noriega Jesús Olaf (178991)</li>
+                        <li>> De La Rosa Rodríguez Erik (177700)</li>
+                        <li>> González Reyes Felipe de Jesús (181134)</li>
+                    </ul>
+                    <ul class="binary-list">
+                        <li>> Mendoza Aguado Karina (179859)</li>
+                        <li>> Serrano Zermeño Leonardo (177301)</li>
+                        <li>> Pérez Ventura Juan Alejandro (180370)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 01_INTRODUCCIÓN</h2>
+            <div class="content-box">
+                [cite_start]<p>El ciberataque sufrido por Equifax en 2017 constituye uno de los incidentes de seguridad de la información más relevantes de la última década[cite: 18]. [cite_start]La brecha expuso datos personales altamente sensibles de aproximadamente 147.9 millones de personas[cite: 19].</p>
+                [cite_start]<p>El análisis resulta pertinente ya que el ataque no fue producto de técnicas avanzadas, sino de la omisión en la aplicación de un parche crítico[cite: 20]. [cite_start]Este hecho evidencia que la falta de disciplina operativa puede generar impactos desproporcionados[cite: 21].</p>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 02_CONTEXTO_GENERAL</h2>
+            <div class="content-box">
+                [cite_start]<p>El incidente afectó a Equifax, una de las principales agencias de informes crediticios[cite: 24]. [cite_start]El origen fue la explotación de una vulnerabilidad crítica en el framework <strong>Apache Struts</strong>[cite: 25].</p>
+                [cite_start]<p>La infraestructura presentaba una arquitectura de red poco segmentada y un inventario de activos incompleto, lo que facilitó que la vulnerabilidad permaneciera sin corregirse[cite: 27, 28].</p>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 03_ANÁLISIS_TÉCNICO</h2>
+            
+            <div class="terminal-box">
+                <h3>3.1 VECTOR DE ATAQUE (CVE-2017-5638)</h3>
+                [cite_start]<p>El vector inicial fue la vulnerabilidad <strong>CVE-2017-5638</strong> en el portal de disputas (ACIS)[cite: 31]. [cite_start]Clasificada con severidad CVSS 10.0 (Crítica), permitía la ejecución remota de código (RCE) manipulando el encabezado HTTP <em>Content-Type</em>[cite: 32].</p>
+                [cite_start]<p class="highlight">> ESTADO DEL PARCHE: DISPONIBLE PERO NO APLICADO[cite: 33].</p>
+            </div>
+
+            <div class="terminal-box">
+                <h3>3.2 DESARROLLO DEL ATAQUE (MITRE ATT&CK)</h3>
+                <ul class="binary-list">
+                    [cite_start]<li><strong>Acceso Inicial:</strong> Explotación de aplicación pública (MITRE T1190)[cite: 39].</li>
+                    [cite_start]<li><strong>Ejecución:</strong> Comandos remotos en el servidor comprometido[cite: 40].</li>
+                    [cite_start]<li><strong>Persistencia:</strong> Implementación de Web Shells (MITRE T1505.003)[cite: 42].</li>
+                    [cite_start]<li><strong>Movimiento Lateral:</strong> Uso de credenciales en texto plano y falta de segmentación (MITRE T1078, T1021)[cite: 43].</li>
+                    [cite_start]<li><strong>Exfiltración:</strong> Consultas masivas de PII a través de canales cifrados durante 76 días[cite: 44, 46].</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 04_TABLA_TÉCNICA_DEL_ATAQUE</h2>
+            <div class="table-responsive">
+                <table class="cyber-table">
+                    <thead>
+                        <tr>
+                            <th>FASE</th>
+                            <th>TÉCNICA / MÉTODO</th>
+                            <th>EVIDENCIA TÉCNICA</th>
+                            <th>IMPACTO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ACCESO INICIAL</td>
+                            <td>Explotación App Pública (MITRE T1190)</td>
+                            [cite_start]<td>CVE-2017-5638 en Apache Struts (Content-Type header)[cite: 49].</td>
+                            [cite_start]<td>Acceso no autorizado al portal ACIS[cite: 49].</td>
+                        </tr>
+                        <tr>
+                            <td>EJECUCIÓN</td>
+                            <td>RCE (Remote Code Execution)</td>
+                            [cite_start]<td>Ejecución de comandos arbitrarios[cite: 49].</td>
+                            [cite_start]<td>Control inicial del sistema[cite: 49].</td>
+                        </tr>
+                        <tr>
+                            <td>PERSISTENCIA Y MOVIMIENTO</td>
+                            <td>Web Shells, Robo de Credenciales (T1505, T1078)</td>
+                            [cite_start]<td>Credenciales en texto plano, falta de segmentación[cite: 49].</td>
+                            [cite_start]<td>Acceso a sistemas internos con permisos elevados[cite: 49].</td>
+                        </tr>
+                        <tr>
+                            <td>EXFILTRACIÓN</td>
+                            <td>Canales Cifrados (T1041)</td>
+                            [cite_start]<td>Certificados SSL caducados impidieron inspección[cite: 49].</td>
+                            [cite_start]<td>Robo progresivo de información (~76 días)[cite: 49].</td>
+                        </tr>
+                        <tr>
+                            <td>DETECCIÓN</td>
+                            <td>Inspección Manual</td>
+                            [cite_start]<td>Actividad anómala tras renovar certificados SSL[cite: 49].</td>
+                            [cite_start]<td>Contención tardía y daño amplificado[cite: 49].</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 05_EVALUACIÓN_IMPACTO_(CIA)</h2>
+            <div class="grid-2">
+                <div class="content-box" style="border-color: #ff0000;">
+                    <h3 style="color:#ff0000;">[C] CONFIDENCIALIDAD - CRÍTICO</h3>
+                    <p>Principio más afectado. [cite_start]Exfiltración de 147.9 millones de registros (SSN, Fechas, Direcciones)[cite: 53]. [cite_start]Causó sanciones regulatorias y daño reputacional[cite: 55].</p>
+                </div>
+                <div class="content-box" style="border-color: #ffff00;">
+                    <h3 style="color:#ffff00;">[I] INTEGRIDAD - ALTO</h3>
+                    <p>Riesgo elevado. [cite_start]Los atacantes tuvieron acceso con credenciales válidas y sin restricciones[cite: 58]. [cite_start]La confiabilidad de los datos fue comprometida[cite: 59].</p>
+                </div>
+            </div>
+            <div class="content-box" style="border-color: #00ff00; margin-top: 10px;">
+                <h3 style="color:#00ff00;">[A] DISPONIBILIDAD - MEDIO/ALTO</h3>
+                <p>Afectación indirecta. [cite_start]Tras la detección, se deshabilitaron servicios y los sistemas de atención colapsaron por el volumen de quejas[cite: 61, 62].</p>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 06_COSTO_TOTAL_(MXN)</h2>
+            [cite_start]<p>> Tipo de cambio calculado: 18.50 MXN/USD[cite: 67].</p>
+            <div class="table-responsive">
+                <table class="cyber-table">
+                    <thead>
+                        <tr>
+                            <th>RUBRO</th>
+                            <th>MONTO (USD)</th>
+                            <th>MONTO (MXN)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Respuesta a incidentes y forense</td>
+                            <td>$100,000,000</td>
+                            [cite_start]<td>$1,850,000,000 [cite: 67]</td>
+                        </tr>
+                        <tr>
+                            <td>Servicios legales</td>
+                            <td>$200,000,000</td>
+                            [cite_start]<td>$3,700,000,000 [cite: 67]</td>
+                        </tr>
+                        <tr>
+                            <td>Atención a afectados</td>
+                            <td>$300,000,000</td>
+                            [cite_start]<td>$5,550,000,000 [cite: 67]</td>
+                        </tr>
+                        <tr>
+                            <td>Multas y acuerdos (FTC, etc.)</td>
+                            <td>$700,000,000</td>
+                            [cite_start]<td>$12,950,000,000 [cite: 67]</td>
+                        </tr>
+                        <tr>
+                            <td>Reforzamiento de seguridad</td>
+                            <td>$125,000,000</td>
+                            [cite_start]<td>$2,312,500,000 [cite: 67]</td>
+                        </tr>
+                        <tr style="background: rgba(0, 255, 0, 0.1); font-weight: bold;">
+                            <td>TOTAL ESTIMADO</td>
+                            <td>$1,425,000,000</td>
+                            [cite_start]<td>$26,362,500,000 [cite: 67]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 07_NORMATIVAS_Y_CONCLUSIONES</h2>
+            
+            <div class="terminal-box">
+                <h3>// FALLAS NORMATIVAS</h3>
+                <ul class="binary-list">
+                    [cite_start]<li>> <strong>ISO/IEC 27001 (A.12.6):</strong> Gestión de vulnerabilidades no aplicada[cite: 74].</li>
+                    [cite_start]<li>> <strong>NIST (Detect):</strong> Falta de monitoreo por 76 días[cite: 82].</li>
+                    [cite_start]<li>> <strong>GDPR:</strong> Incumplimiento de medidas técnicas (Arts. 5 y 32)[cite: 84].</li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h3>// CONCLUSIONES</h3>
+                [cite_start]<p>El incidente no fue solo técnico, sino organizacional[cite: 87]. [cite_start]La falta de gobernanza y disciplina operativa (parches básicos) causó pérdidas millonarias[cite: 88].</p>
+                [cite_start]<p><strong>Lección Aprendida:</strong> La prevención y el liderazgo en seguridad son una ventaja competitiva, no un costo[cite: 95].</p>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <div class="ssl-badge">
+                    <i class="fas fa-lock"></i> DATOS ENCRIPTADOS
+                </div>
+            <div class="footer-content" style="text-align: left; padding: 20px;">
+                <h3>// REFERENCIAS</h3>
+                <ul style="font-size: 0.8rem; color: #666;">
+                    <li>[1] Senado de EE.UU. (2019). [cite_start]Informe Equifax[cite: 98].</li>
+                    <li>[2] Equifax Inc. (2017). [cite_start]Anuncio del incidente[cite: 101].</li>
+                    <li>[3] FTC (2019). [cite_start]Acuerdo de 575 millones de dólares[cite: 105].</li>
+                    <li>[4] Apache Software Foundation (2017). [cite_start]CVE-2017-5638[cite: 106].</li>
+                    [cite_start]<li>[5] MITRE ATT&CK Framework (2023)[cite: 110].</li>
+                </ul>
+                <p class="copyright" style="text-align: center; margin-top: 20px;">
+                    © 2026 [Hououin] | CNO V SEGURIDAD INFORMÁTICA
+                </p>
+            </div>
+        </footer>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

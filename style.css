@@ -263,3 +263,205 @@ footer {
     .nixie-wrapper { margin-top: 20px; width: 100%; text-align: center; }
     .grid-2 { grid-template-columns: 1fr; }
 }
+
+/* ESTILOS DE PESTANAS (TABS) */
+.tabs-wrapper {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-dim);
+    padding-bottom: 10px;
+}
+
+.tab-link {
+    background-color: transparent;
+    color: #666;
+    border: 1px solid var(--border-dim);
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.1rem;
+    transition: 0.3s;
+    flex-grow: 1; /* Para que ocupen el ancho disponible */
+}
+
+.tab-link:hover {
+    color: var(--terminal-green);
+    border-color: var(--terminal-green);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+.tab-link.active {
+    background-color: var(--terminal-green);
+    color: #000;
+    border-color: var(--terminal-green);
+    font-weight: bold;
+    box-shadow: 0 0 15px var(--terminal-green);
+}
+
+/* LISTA DE ACTIVIDADES */
+.activity-list {
+    list-style: none;
+    padding: 0;
+}
+
+.activity-list li {
+    margin-bottom: 10px;
+    border: 1px solid #222;
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.2s;
+}
+
+.activity-list li:hover {
+    border-left: 5px solid var(--nixie-glow);
+    background: rgba(255, 69, 0, 0.05);
+    transform: translateX(5px);
+}
+
+.activity-list a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 1.1rem;
+}
+
+.activity-list a:hover {
+    color: #fff;
+}
+
+/* ESTILOS PARA TABLAS CIBERNETICAS */
+.table-responsive {
+    overflow-x: auto; /* Permite scroll horizontal en celular */
+}
+
+.cyber-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.cyber-table th, .cyber-table td {
+    border: 1px solid var(--border-dim);
+    padding: 10px;
+    text-align: left;
+}
+
+.cyber-table th {
+    background-color: rgba(0, 255, 0, 0.1);
+    color: var(--terminal-green);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--terminal-green);
+}
+
+.cyber-table td {
+    color: #ccc;
+}
+
+.cyber-table tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.cyber-table tr:hover td {
+    color: #fff;
+    text-shadow: 0 0 5px var(--terminal-green);
+}
+
+/* --- ESTILOS DE TERMINAL PARA CODIGO --- */
+.terminal-code-box {
+    background-color: #0c0c0c; /* Fondo casi negro */
+    border: 1px solid #333;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    overflow: hidden;
+    font-family: 'VT323', monospace; /* Fuente pixelada estilo consola */
+}
+
+.terminal-header {
+    background-color: #1a1a1a;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    color: #777;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.terminal-dots {
+    display: flex;
+    gap: 5px;
+}
+
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.red { background-color: #ff5f56; }
+.yellow { background-color: #ffbd2e; }
+.green { background-color: #27c93f; }
+
+.terminal-body {
+    padding: 15px;
+    color: #e0e0e0;
+    font-size: 1.1rem;
+}
+
+.prompt {
+    color: var(--nixie-glow); /* El color naranja neón */
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.command {
+    color: var(--terminal-green); /* El verde clásico */
+}
+
+.comment {
+    color: #666;
+    display: block;
+    margin-bottom: 5px;
+    font-style: italic;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+}
+
+/* ESTILO PARA ENLACES DESACTIVADOS / PENDIENTES */
+.disabled-link {
+    pointer-events: none; /* No permite hacer clic */
+    color: #444 !important; /* Color gris oscuro apagado */
+    border-color: #333 !important;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(0,0,0,0),
+        rgba(0,0,0,0) 10px,
+        rgba(50,50,50,0.1) 10px,
+        rgba(50,50,50,0.1) 20px
+    );
+    font-style: italic;
+}
+
+.disabled-link:hover {
+    transform: none !important;
+    border-left: 1px solid #333 !important;
+}
+
+/* --- AGREGAR AL FINAL DE style.css --- */
+
+/* ESTILO PARA PESTAÑAS (TABS) BLOQUEADAS */
+.disabled-tab {
+    pointer-events: none;       /* No permite hacer clic */
+    background-color: #0a0a0a;  /* Fondo casi negro */
+    color: #444;                /* Texto gris oscuro */
+    border: 1px dashed #333;    /* Borde punteado discreto */
+    cursor: not-allowed;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+/* Icono de candado dentro de la tab */
+.disabled-tab i {
+    margin-left: 5px;
+    color: #ff4500; /* Naranja rojizo para indicar bloqueo */
+}

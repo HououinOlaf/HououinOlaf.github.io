@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades | CNO V</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <div class="container">
+        
+        <header>
+            <div class="header-top">
+                <div class="user-info">
+                    <h1 class="glitch" data-text="REGISTRO DE MISIONES">REGISTRO DE MISIONES</h1>
+                    <p class="subtitle">> ESTADO: <span class="highlight">ACCESO CONCEDIDO</span></p>
+                </div>
+                <a href="index.html" class="cyber-btn" style="width: auto;">
+                    << VOLVER AL HOME
+                </a>
+            </div>
+        </header>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> SELECCIONAR_PERIODO</h2>
+            
+            <div class="tabs-wrapper">
+                <button class="tab-link active" onclick="openParcial(event, 'parcial1')">
+                    [PARCIAL_1]
+                </button>
+                
+                <button class="tab-link disabled-tab">
+                    [PARCIAL_2] // PRÓXIMAMENTE <i class="fas fa-lock"></i>
+                </button>
+                
+                <button class="tab-link disabled-tab">
+                    [PARCIAL_3] // PRÓXIMAMENTE <i class="fas fa-lock"></i>
+                </button>
+            </div>
+
+            <div id="parcial1" class="tab-content" style="display: block;">
+                <h3>// LISTA_DE_TAREAS_P1</h3>
+                <ul class="activity-list">
+                    <li><a href="actividad1.html">> ACTIVIDAD 1: REPORTE TÉCNICO: EQUIFAX</a></li>
+                    <li><a href="actividad2.html">> ACTIVIDAD 2: ESCENARIOS</a></li>
+                    <li><a href="actividad3.html">> ACTIVIDAD 3: IPTABLES FIREWALL</a></li>
+                    <li><a href="actividad4.html">> ACTIVIDAD 4: REGLAS DE FIREWALL</a></li>
+                    <li class="disabled-link"    >> ACTIVIDAD 5: [PENDIENTE / OFFLINE] <i class="fas fa-ban"></i></li>
+                    <li><a href="actividad6.html">> ACTIVIDAD 6: METODOLOGÍAS</a></li>
+                </ul>
+            </div>
+
+            <div id="parcial2" class="tab-content" style="display: none;">
+                <h3>// LISTA_DE_TAREAS_P2</h3>
+                <ul class="activity-list">
+                    <li><a href="plantilla_actividad.html">> ACTIVIDAD 1: Titulo 1 (P2)</a></li>
+                    <li><a href="plantilla_actividad.html">> ACTIVIDAD 2: Titulo 2 (P2)</a></li>
+                    <li><a href="plantilla_actividad.html">> ACTIVIDAD 3: Titulo 3 (P2)</a></li>
+                    <li><a href="plantilla_actividad.html">> ACTIVIDAD 4: Titulo 4 (P2)</a></li>
+                    <li><a href="plantilla_actividad.html">> ACTIVIDAD 5: Titulo 5 (P2)</a></li>
+                    <li><a href="plantilla_actividad.html">> ACTIVIDAD 6: Titulo 6 (P2)</a></li>
+                </ul>
+            </div>
+
+            <div id="parcial3" class="tab-content" style="display: none;">
+                <h3>// LISTA_DE_TAREAS_P3</h3>
+                <ul class="activity-list">
+                    <li><a href="plantilla_actividad.html">> ACTIVIDAD 1: Titulo 1 (P3)</a></li>
+                    <li><a href="plantilla_actividad.html">> ACTIVIDAD 2: Titulo 2 (P3)</a></li>
+                    <li><a href="plantilla_actividad.html">> ACTIVIDAD 3: Titulo 3 (P3)</a></li>
+                    <li><a href="plantilla_actividad.html">> ACTIVIDAD 4: Titulo 4 (P3)</a></li>
+                    <li><a href="plantilla_actividad.html">> ACTIVIDAD 5: Titulo 5 (P3)</a></li>
+                    <li><a href="plantilla_actividad.html">> ACTIVIDAD 6: Titulo 6 (P3)</a></li>
+                </ul>
+            </div>
+
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p class="copyright">
+                    © 2024 [Hououin] | SISTEMA DE ARCHIVOS
+                </p>
+            </div>
+        </footer>
+
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

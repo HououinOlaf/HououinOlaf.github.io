@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 3: IPTABLES | CNO V</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <div class="container">
+        
+        <header>
+            <div class="header-top">
+                <div class="user-info">
+                    <h1 class="glitch" data-text="ACT.03: IPTABLES FIREWALL">ACT.03: IPTABLES FIREWALL</h1>
+                    <p class="subtitle">> TEMA: <span class="highlight">POLÍTICAS DE FILTRADO</span></p>
+                    <p class="subtitle">> ALUMNO: [Coronado Noriega Jesús Olaf] | FECHA: [03/02/2026]</p>
+                </div>
+                <div style="text-align: right; min-width: 150px;">
+                    <a href="actividades.html" class="cyber-btn" style="font-size: 0.8rem;">
+                        << VOLVER A LISTA
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="178991-act03.pdf" download class="cyber-btn" style="display: inline-block; width: auto; max-width: 90%; padding: 15px 40px; font-size: 1.1rem; border-width: 2px;">
+                <i class="fas fa-file-pdf"></i> [ DESCARGAR PDF ORIGINAL ]
+            </a>
+        </div>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 01_FLUJO_DEL_PAQUETE</h2>
+            <div class="terminal-box">
+                <p>1. Completa los espacios conforme se explica el flujo del paquete.</p>
+                <p>> Cuando un paquete llega al sistema, primero pasa por una:</p>
+                <div style="text-align: center; font-size: 1.4rem; margin-top: 15px; color: var(--terminal-green); font-weight: bold;">
+                    [ TABLA ] <i class="fas fa-arrow-right"></i> [ CADENA ] <i class="fas fa-arrow-right"></i> [ ACCIÓN ]
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 02_TABLAS_DEL_KERNEL</h2>
+            <div class="table-responsive">
+                <p>2. Relaciona cada tabla con su propósito principal.</p>
+                <table class="cyber-table">
+                    <thead>
+                        <tr>
+                            <th>TABLA</th>
+                            <th>PROPÓSITO PRINCIPAL</th>
+                            <th>EJEMPLO DE USO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="highlight">FILTER</td>
+                            <td>Filtrado de Paquetes</td>
+                            <td>Bloqueo de un Puerto</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">NAT</td>
+                            <td>Traducción de direcciones</td>
+                            <td>Redirección de Puertos</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">MANGLE</td>
+                            <td>Alteración de campos</td>
+                            <td>Cambiar TTL o TOS</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">RAW</td>
+                            <td>Configurar excepciones</td>
+                            <td>Eximir del seguimiento</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">SECURITY</td>
+                            <td>Marcar Paquetes (SELinux)</td>
+                            <td>Etiquetas de seguridad</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 03_ANATOMÍA_Y_ANÁLISIS</h2>
+            
+            <p style="margin-bottom:5px;">3. Anatomía de un comando iptables:</p>
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                    </div>
+                    <span style="margin-left: 10px;">root@kali: ~</span>
+                </div>
+                <div class="terminal-body">
+                    <span class="prompt">root@kali:~#</span>
+                    <span class="command">iptables -A INPUT -p tcp -m multiport --dports 80,443 -j ACCEPT</span>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h3 style="color: var(--nixie-glow);">4. Este comando permite:</h3>
+                <code style="display:block; background:#000; color:#888; padding:5px; font-size:0.8rem; margin-bottom:10px; border-left: 2px solid #555;">
+                    > REF: iptables -A INPUT -p tcp ... --dports 80,443 ...
+                </code>
+                <p style="font-size: 1.1rem; color: #fff;">
+                    "Permite la entrada de tráfico a través del Protocolo <strong>TCP</strong> hacia los puertos <strong>80</strong> y <strong>443</strong>."
+                </p>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 04_OPCIONES_COMUNES</h2>
+            <div class="terminal-box">
+                <p>5. Variables y opciones comunes:</p>
+                <ul class="binary-list">
+                    <li>a) Limitar intentos por minuto: <span class="highlight">--limit 5/minute</span></li>
+                    <li>b) Filtrar por IP de origen: <span class="highlight">-s</span> o <span class="highlight">--source</span></li>
+                    <li>c) Ver solo números (sin DNS): <span class="highlight">--list -n</span></li>
+                    <li>d) Ver reglas con contadores: <span class="highlight">-L -v</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 05_ANÁLISIS_DE_REGLA_6</h2>
+            
+            <p>6. ¿Qué hace esta regla?</p>
+            
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span style="margin-left: 10px;">root@kali: ~</span>
+                </div>
+                <div class="terminal-body">
+                    <span class="prompt">root@kali:~#</span>
+                    <span class="command">iptables -A INPUT -i eth0 -p tcp -m multiport --dports 22,80,443 \ <br>
+                    -m state --state NEW,ESTABLISHED -j ACCEPT</span>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h3 style="color: var(--nixie-glow);">// RESPUESTA:</h3>
+                <ul class="binary-list">
+                    <li>> Añade una regla a la cadena de entrada <strong>INPUT</strong>.</li>
+                    <li>> Para la red <strong>eth0</strong>.</li>
+                    <li>> Permite Protocolos <strong>TCP</strong> dirigidos a los puertos <strong>22 (SSH), 80 y 443</strong>.</li>
+                    <li>> Cuando el estado sea <strong>Nuevo</strong> o <strong>Ya establecido</strong>.</li>
+                    <li>> Y la acción Final es <strong>Aceptar (ACCEPT)</strong> los Paquetes.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 06_ESCRITURA_DE_REGLAS_(7-11)</h2>
+            
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span style="margin-left: 10px;">root@kali: ~ (bash)</span>
+                </div>
+                <div class="terminal-body">
+                    <span class="comment"># 7. Permitir tráfico HTTP entrante</span>
+                    <span class="prompt">root@kali:~#</span>
+                    <span class="command">iptables -A INPUT -p tcp --dport 80 -j ACCEPT</span>
+                </div>
+            </div>
+
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span style="margin-left: 10px;">root@kali: ~ (bash)</span>
+                </div>
+                <div class="terminal-body">
+                    <span class="comment"># 8. Permitir todo el tráfico saliente</span>
+                    <span class="prompt">root@kali:~#</span>
+                    <span class="command">iptables -A OUTPUT -j ACCEPT</span>
+                </div>
+            </div>
+
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span style="margin-left: 10px;">root@kali: ~ (bash)</span>
+                </div>
+                <div class="terminal-body">
+                    <span class="comment"># 9. Permitir SSH solo desde la IP 192.168.1.50</span>
+                    <span class="prompt">root@kali:~#</span>
+                    <span class="command">iptables -A INPUT -p tcp -s 192.168.1.50 --dport 22 -j ACCEPT</span>
+                </div>
+            </div>
+
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span style="margin-left: 10px;">root@kali: ~ (bash)</span>
+                </div>
+                <div class="terminal-body">
+                    <span class="comment"># 10. Permitir tráfico TCP (80, 443) solo si es ESTABLISHED/RELATED</span>
+                    <span class="prompt">root@kali:~#</span>
+                    <span class="command">iptables -A INPUT -p tcp -m multiport --dports 80,443 -m state --state ESTABLISHED,RELATED -j ACCEPT</span>
+                </div>
+            </div>
+
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span style="margin-left: 10px;">root@kali: ~ (bash)</span>
+                </div>
+                <div class="terminal-body">
+                    <span class="comment"># 11. Permitir tráfico TCP por eth0 a 22, 80, 443 (NEW y ESTABLISHED)</span>
+                    <span class="prompt">root@kali:~#</span>
+                    <span class="command">iptables -A INPUT -i eth0 -p tcp -m multiport --dports 22,80,443 -m state --state NEW,ESTABLISHED -j ACCEPT</span>
+                </div>
+            </div>
+
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <div class="ssl-badge">
+                    <i class="fas fa-lock"></i> DATOS ENCRIPTADOS
+                </div>
+            <div class="footer-content">
+                <p class="copyright">
+                    © 2026 [Hououin] | CNO V SEGURIDAD INFORMÁTICA
+                </p>
+            </div>
+        </footer>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
