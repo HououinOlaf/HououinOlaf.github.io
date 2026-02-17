@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actividad 6: Metodologías | CNO V</title>
+    <title>Actividad 6: VPN IPSec | CNO V</title>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -17,12 +17,12 @@
         <header>
             <div class="header-top">
                 <div class="user-info">
-                    <h1 class="glitch" data-text="ACT.06: METODOLOGÍAS">ACT.06: METODOLOGÍAS</h1>
-                    <p class="subtitle">> TEMA: <span class="highlight">ESTÁNDARES DE CIBERSEGURIDAD</span></p>
+                    <h1 class="glitch" data-text="ACT.06: VPN SITE-TO-SITE">ACT.06: VPN SITE-TO-SITE</h1>
+                    <p class="subtitle">> PROTOCOLO: <span class="highlight">IPSEC (TUNNEL MODE)</span></p>
                     <p class="subtitle">> ALUMNO: [Coronado Noriega Jesús Olaf - 178991]</p>
                 </div>
                 <div style="text-align: right; min-width: 150px;">
-                    <a href="../actividades.html" class="cyber-btn" style="font-size: 0.8rem;">
+                    <a href="actividades.html" class="cyber-btn" style="font-size: 0.8rem;">
                         << VOLVER A LISTA
                     </a>
                 </div>
@@ -36,93 +36,144 @@
         </div>
 
         <section class="panel">
-            <h2><span class="prefix">#</span> 01_COMPARATIVA_TÉCNICA</h2>
+            <h2><span class="prefix">#</span> 01_MARCO_INTRODUCTORIO</h2>
             <div class="content-box">
-                <p>Análisis comparativo de los principales marcos de trabajo (Frameworks) y metodologías utilizadas en la industria para la ejecución de pruebas de penetración, auditorías de seguridad y gestión de vulnerabilidades.</p>
+                [cite_start]<p>El objetivo central de este laboratorio consistió en el despliegue de una <strong>Red Privada Virtual (VPN)</strong> utilizando el conjunto de protocolos IPSec[cite: 140].</p>
+                [cite_start]<p>El escenario se recreó mediante Cisco Packet Tracer para establecer un canal de comunicación cifrado entre dos sucursales remotas, permitiendo que la información viaje segura a través de una red pública (ISP)[cite: 141, 142].</p>
             </div>
         </section>
 
         <section class="panel">
-            <h2><span class="prefix">#</span> 02_MATRIZ_DE_METODOLOGÍAS</h2>
+            <h2><span class="prefix">#</span> 02_ARQUITECTURA_DE_RED</h2>
             
-            <div class="table-responsive">
-                <table class="cyber-table">
-                    <thead>
-                        <tr>
-                            <th>METODOLOGÍA</th>
-                            <th>ENFOQUE / OBJETIVO</th>
-                            <th>FASES / ESTRUCTURA</th>
-                            <th>ORIENTACIÓN</th>
-                            <th>VERSIÓN</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="highlight" style="font-weight:bold; color:#fff;">MITRE ATT&CK</td>
-                            <td>Base de conocimiento de tácticas y técnicas adversarias. Detección de ataques.</td>
-                            <td>14 Tácticas (Desde Reconocimiento hasta Impacto).</td>
-                            <td>Ataque / Defensa (Blue/Red Team)</td>
-                            <td>v16.1</td>
-                        </tr>
-                        
-                        <tr>
-                            <td class="highlight" style="font-weight:bold; color:#fff;">OWASP WSTG</td>
-                            <td>Guía de pruebas para seguridad en aplicaciones web y servicios nube.</td>
-                            <td>11 Categorías técnicas de prueba.</td>
-                            <td>Evaluación Web</td>
-                            <td>v4.2</td>
-                        </tr>
-
-                        <tr>
-                            <td class="highlight" style="font-weight:bold; color:#fff;">NIST SP 800-115</td>
-                            <td>Guía técnica de evaluación de seguridad y cumplimiento normativo.</td>
-                            <td>Planificación, Descubrimiento, Ejecución, Reporte.</td>
-                            <td>Evaluación / Cumplimiento</td>
-                            <td>2008</td>
-                        </tr>
-
-                        <tr>
-                            <td class="highlight" style="font-weight:bold; color:#fff;">OSSTMM</td>
-                            <td>Manual de medición de seguridad operativa (Métricas tangibles).</td>
-                            <td>5 Canales: Humano, Físico, Inalámbrico, Telecom, Datos.</td>
-                            <td>Evaluación Integral</td>
-                            <td>v3</td>
-                        </tr>
-
-                        <tr>
-                            <td class="highlight" style="font-weight:bold; color:#fff;">PTES</td>
-                            <td>Estándar de ejecución de pentesting (Consultoría comercial).</td>
-                            <td>7 Fases: Desde pre-acuerdo hasta el reporte.</td>
-                            <td>Ataque / Consultoría</td>
-                            <td>v1.1</td>
-                        </tr>
-
-                        <tr>
-                            <td class="highlight" style="font-weight:bold; color:#fff;">ISSAF</td>
-                            <td>Framework de evaluación profunda de sistemas (Auditoría compleja).</td>
-                            <td>Planificación, Evaluación, Reporte, Limpieza.</td>
-                            <td>Evaluación de Sistemas</td>
-                            <td>v0.2.1</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div style="text-align: center; margin-bottom: 20px; padding: 15px; border: 1px dashed #333; background: rgba(0,0,0,0.5);">
+                <p style="color: var(--nixie-glow); margin-bottom: 10px; font-size: 0.9rem;">> DIAGRAMA LÓGICO DE LA RED (PACKET TRACER):</p>
+                
+                <img src="topologia_vpn.png" alt="Topología VPN IPSec" 
+                     style="max-width: 100%; height: auto; border: 1px solid #444; 
+                            mix-blend-mode: screen; /* ESTO HACE TRANSPARENTE EL NEGRO */
+                            filter: contrast(1.2) brightness(1.1);"> 
+                
+                <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">
+                    [cite_start]*Topología triangular: R1 (Sucursal A), ISP (Internet), R3 (Sucursal B)[cite: 144].
+                </p>
             </div>
 
-            <div class="terminal-box" style="margin-top: 20px;">
-                <h3>// NOTAS_ADICIONALES</h3>
+            <div class="terminal-box">
+                <h3>// COMPONENTES_DEL_ESCENARIO</h3>
                 <ul class="binary-list">
-                    <li>> <strong>MITRE:</strong> Utilizado ampliamente por SOCs y Threat Hunters.</li>
-                    <li>> <strong>OWASP:</strong> El estándar de facto para seguridad web (Certificaciones OSWE/GWAPT).</li>
-                    <li>> <strong>PTES:</strong> Enfocado en estandarizar la calidad del servicio de pentesting.</li>
+                    <li>> <strong>Nivel Enrutamiento:</strong> R1 y R3 como Gateways; [cite_start]Router central como ISP[cite: 145, 146].</li>
+                    [cite_start]<li>> <strong>Nivel Acceso:</strong> Switches 2960 para la LAN de cada oficina[cite: 147].</li>
+                    [cite_start]<li>> <strong>Terminales:</strong> PC-A y PC-C para pruebas de conectividad[cite: 148].</li>
                 </ul>
             </div>
         </section>
 
-        <footer>
-            <div class="footer-content">
-                <div class="ssl-badge">
-                    <i class="fas fa-lock"></i> DATOS ENCRIPTADOS
+        <section class="panel">
+            <h2><span class="prefix">#</span> 03_CONFIGURACIÓN_IPSEC_(FASES)</h2>
+            <div class="table-responsive">
+                <table class="cyber-table">
+                    <thead>
+                        <tr>
+                            <th>FASE</th>
+                            <th>CONFIGURACIÓN</th>
+                            <th>PARÁMETROS SELECCIONADOS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="highlight">0. TRÁFICO INTERESANTE</td>
+                            <td>Access Control List (ACL)</td>
+                            [cite_start]<td>ACL 110: Permitir tráfico de LAN A hacia LAN B[cite: 158].</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">1. ISAKMP (IKE)</td>
+                            <td>Policy Negotiation</td>
+                            <td>Cifrado: <strong>AES</strong> | Hash: <strong>SHA</strong> | Auth: <strong>Pre-Shared Key</strong> | [cite_start]Grupo: <strong>DH2</strong>[cite: 160].</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">2. IPSEC TRANSFORM</td>
+                            <td>Transform Set</td>
+                            <td>Protocolo: <strong>ESP</strong> | Cifrado: <strong>AES</strong> | [cite_start]Integridad: <strong>SHA-HMAC</strong>[cite: 161].</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">3. VINCULACIÓN</td>
+                            <td>Crypto Map</td>
+                            [cite_start]<td>Aplicado a la interfaz WAN (Salida a Internet)[cite: 162].</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 04_EVIDENCIA_EN_TERMINAL_(CLI)</h2>
+            
+            [cite_start]<p>> Fragmentos de la configuración aplicada [cite: 204-253]:</p>
+
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span style="margin-left: 10px;">Console: ISP Router</span>
                 </div>
+                <div class="terminal-body">
+                    <span class="comment"># Configuración de interfaces públicas</span>
+                    <span class="prompt">Router(config)#</span> <span class="command">hostname isp</span><br>
+                    <span class="prompt">isp(config)#</span> <span class="command">int g0/0</span><br>
+                    <span class="prompt">isp(config-if)#</span> <span class="command">ip add 209.165.200.2 255.255.255.0</span><br>
+                    <span class="prompt">isp(config-if)#</span> <span class="command">no shutdown</span><br>
+                    <span class="prompt">isp(config-if)#</span> <span class="command">exit</span><br>
+                    <span class="output">% LINK-5-CHANGED: Interface GigabitEthernet0/0, changed state to up</span>
+                </div>
+            </div>
+
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span style="margin-left: 10px;">Console: R1 Configuration</span>
+                </div>
+                <div class="terminal-body">
+                    <span class="comment"># Definiendo tráfico VPN (ACL 110)</span>
+                    <span class="prompt">R1(config)#</span> <span class="command">access-list 110 permit ip 192.168.1.0 0.0.0.255 192.168.3.0 0.0.0.255</span><br>
+                    <br>
+                    <span class="comment"># Creando el Mapa Criptográfico</span>
+                    <span class="prompt">R1(config)#</span> <span class="command">crypto map MAPA_VPN 10 ipsec-isakmp</span><br>
+                    <span class="output">% NOTE: This new crypto map will remain disabled until a peer and a valid access list have been configured.</span>
+                </div>
+            </div>
+            
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span style="margin-left: 10px;">Console: R1 Verification</span>
+                </div>
+                <div class="terminal-body">
+                    <span class="comment"># Verificando conectividad con el ISP</span>
+                    <span class="prompt">R1#</span> <span class="command">ping 209.165.200.1</span><br>
+                    <span class="output">Type escape sequence to abort.</span><br>
+                    <span class="output">Sending 5, 100-byte ICMP Echos to 209.165.200.1, timeout is 2 seconds:</span><br>
+                    <span class="output">!!!!!</span><br>
+                    <span class="output">Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/0 ms</span>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 05_CONCLUSIONES_Y_VALIDACIÓN</h2>
+            <div class="grid-2">
+                <div class="content-box">
+                    <h3>// RESULTADO_DE_PRUEBAS</h3>
+                    [cite_start]<p>Al enviar paquetes ICMP desde PC-A a PC-C, el análisis en modo Simulation confirmó que los datos ya no viajan en texto plano, sino encapsulados en tramas <strong>ESP</strong>[cite: 171, 172].</p>
+                </div>
+                <div class="content-box">
+                    <h3>// CONCLUSIÓN_FINAL</h3>
+                    <p>La implementación fue exitosa. [cite_start]IPSec garantiza que la información corporativa viaje segura a través de redes públicas, protegiendo la carga útil de intercepciones[cite: 175, 176].</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
             <div class="footer-content">
                 <p class="copyright">
                     © 2026 [Hououin] | CNO V SEGURIDAD INFORMÁTICA

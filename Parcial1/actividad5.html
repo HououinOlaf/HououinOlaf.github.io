@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 5: Metodologías | CNO V</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <div class="container">
+        
+        <header>
+            <div class="header-top">
+                <div class="user-info">
+                    <h1 class="glitch" data-text="ACT.05: METODOLOGÍAS">ACT.05: METODOLOGÍAS</h1>
+                    <p class="subtitle">> TEMA: <span class="highlight">ESTÁNDARES DE CIBERSEGURIDAD</span></p>
+                    <p class="subtitle">> ALUMNO: [Coronado Noriega Jesús Olaf - 178991]</p>
+                </div>
+                <div style="text-align: right; min-width: 150px;">
+                    <a href="../actividades.html" class="cyber-btn" style="font-size: 0.8rem;">
+                        << VOLVER A LISTA
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="178991-Act05.pdf" download class="cyber-btn" style="display: inline-block; width: auto; max-width: 90%; padding: 15px 40px; font-size: 1.1rem; border-width: 2px;">
+                <i class="fas fa-file-pdf"></i> [ DESCARGAR PDF ORIGINAL ]
+            </a>
+        </div>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 01_COMPARATIVA_TÉCNICA</h2>
+            <div class="content-box">
+                <p>Análisis comparativo de los principales marcos de trabajo (Frameworks) y metodologías utilizadas en la industria para la ejecución de pruebas de penetración, auditorías de seguridad y gestión de vulnerabilidades.</p>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 02_MATRIZ_DE_METODOLOGÍAS</h2>
+            
+            <div class="table-responsive">
+                <table class="cyber-table">
+                    <thead>
+                        <tr>
+                            <th>METODOLOGÍA</th>
+                            <th>ENFOQUE / OBJETIVO</th>
+                            <th>FASES / ESTRUCTURA</th>
+                            <th>ORIENTACIÓN</th>
+                            <th>VERSIÓN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="highlight" style="font-weight:bold; color:#fff;">MITRE ATT&CK</td>
+                            <td>Base de conocimiento de tácticas y técnicas adversarias. Detección de ataques.</td>
+                            <td>14 Tácticas (Desde Reconocimiento hasta Impacto).</td>
+                            <td>Ataque / Defensa (Blue/Red Team)</td>
+                            <td>v16.1</td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="highlight" style="font-weight:bold; color:#fff;">OWASP WSTG</td>
+                            <td>Guía de pruebas para seguridad en aplicaciones web y servicios nube.</td>
+                            <td>11 Categorías técnicas de prueba.</td>
+                            <td>Evaluación Web</td>
+                            <td>v4.2</td>
+                        </tr>
+
+                        <tr>
+                            <td class="highlight" style="font-weight:bold; color:#fff;">NIST SP 800-115</td>
+                            <td>Guía técnica de evaluación de seguridad y cumplimiento normativo.</td>
+                            <td>Planificación, Descubrimiento, Ejecución, Reporte.</td>
+                            <td>Evaluación / Cumplimiento</td>
+                            <td>2008</td>
+                        </tr>
+
+                        <tr>
+                            <td class="highlight" style="font-weight:bold; color:#fff;">OSSTMM</td>
+                            <td>Manual de medición de seguridad operativa (Métricas tangibles).</td>
+                            <td>5 Canales: Humano, Físico, Inalámbrico, Telecom, Datos.</td>
+                            <td>Evaluación Integral</td>
+                            <td>v3</td>
+                        </tr>
+
+                        <tr>
+                            <td class="highlight" style="font-weight:bold; color:#fff;">PTES</td>
+                            <td>Estándar de ejecución de pentesting (Consultoría comercial).</td>
+                            <td>7 Fases: Desde pre-acuerdo hasta el reporte.</td>
+                            <td>Ataque / Consultoría</td>
+                            <td>v1.1</td>
+                        </tr>
+
+                        <tr>
+                            <td class="highlight" style="font-weight:bold; color:#fff;">ISSAF</td>
+                            <td>Framework de evaluación profunda de sistemas (Auditoría compleja).</td>
+                            <td>Planificación, Evaluación, Reporte, Limpieza.</td>
+                            <td>Evaluación de Sistemas</td>
+                            <td>v0.2.1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="terminal-box" style="margin-top: 20px;">
+                <h3>// NOTAS_ADICIONALES</h3>
+                <ul class="binary-list">
+                    <li>> <strong>MITRE:</strong> Utilizado ampliamente por SOCs y Threat Hunters.</li>
+                    <li>> <strong>OWASP:</strong> El estándar de facto para seguridad web (Certificaciones OSWE/GWAPT).</li>
+                    <li>> <strong>PTES:</strong> Enfocado en estandarizar la calidad del servicio de pentesting.</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <div class="ssl-badge">
+                    <i class="fas fa-lock"></i> DATOS ENCRIPTADOS
+                </div>
+            <div class="footer-content">
+                <p class="copyright">
+                    © 2026 [Hououin] | CNO V SEGURIDAD INFORMÁTICA
+                </p>
+            </div>
+        </footer>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
