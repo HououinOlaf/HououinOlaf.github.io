@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos | CNO V</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../style.css"> 
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <div class="container">
+        
+        <header>
+            <div class="header-top">
+                <div class="user-info">
+                    <h1 class="glitch" data-text="REGISTRO DE PROYECTOS">REGISTRO DE PROYECTOS</h1>
+                    <p class="subtitle">> ESTADO: <span class="highlight">ACCESO CONCEDIDO</span></p>
+                </div>
+                <a href="../index.html" class="cyber-btn" style="width: auto;">
+                    << VOLVER AL HOME
+                </a>
+            </div>
+        </header>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> SELECCIONAR_PROYECTO</h2>
+            
+            <div class="tabs-wrapper">
+                <button class="tab-link active" onclick="openParcial(event, 'proyecto1')">
+                    [PROYECTO_1]
+                </button>
+                
+                <button class="tab-link" onclick="openParcial(event, 'proyecto2')">
+                    [PROYECTO_2]
+                </button>
+                
+                <button class="tab-link disabled-tab">
+                    [PROYECTO_3] // PRÓXIMAMENTE <i class="fas fa-lock"></i>
+                </button>
+            </div>
+
+            <div id="proyecto1" class="tab-content" style="display: block;">
+                
+                <div class="content-box" style="border-color: var(--nixie-glow); margin-bottom: 25px;">
+                    <h3 style="color: var(--nixie-glow); margin-top: 0;">// PR_01: INTRUSIÓN Y ESCALADA EN "SNAKEOIL"</h3>
+                </div>
+
+                <h4 style="color: var(--terminal-green); border-bottom: 1px dashed #333; padding-bottom: 5px;">> 01_MARCO_OPERATIVO</h4>
+                <div class="terminal-box" style="margin-bottom: 20px;">
+                    <p>Las evaluaciones de penetración (Pentesting) son operaciones críticas que simulan tácticas adversarias reales para descubrir brechas antes de que sean explotadas. Para pulir estas habilidades ofensivas, se recurre a laboratorios de tipo "Boot-to-Root" proporcionados por plataformas como <strong>VulnHub</strong>.</p>
+                    <p>Este reporte documenta la intrusión controlada sobre la máquina objetivo <strong>SnakeOil</strong>. Durante la operación, se desplegaron tácticas de recolección de información, evasión de controles, explotación de servicios expuestos y, en última instancia, la escalada de privilegios para comprometer el nodo por completo.</p>
+                </div>
+
+                <h4 style="color: var(--terminal-green); border-bottom: 1px dashed #333; padding-bottom: 5px;">> 02_VECTORES_DE_ATAQUE_Y_DESARROLLO</h4>
+                
+                <div class="grid-2" style="margin-bottom: 20px;">
+                    <div class="content-box">
+                        <h5 style="color: #fff; margin-top:0;">// 2.1_TOPOLOGÍA_DEL_ENTORNO</h5>
+                        <ul class="binary-list">
+                            <li>> <strong>Nodo Ofensivo:</strong> Kali Linux (Atacante).</li>
+                            <li>> <strong>Nodo Objetivo:</strong> Máquina Virtual SnakeOil.</li>
+                            <li>> <strong>Aislamiento:</strong> Red NAT privada.</li>
+                        </ul>
+                    </div>
+                    <div class="content-box">
+                        <h5 style="color: #fff; margin-top:0;">// 2.2_RECONOCIMIENTO_ACTIVO</h5>
+                        <p style="font-size: 0.9rem; color: #ccc;">Se procedió a la enumeración de la superficie de ataque mediante escaneos de puertos y descubrimiento de rutas. El hallazgo principal fue un servidor web activo albergando directorios públicos y rutas ocultas.</p>
+                    </div>
+                </div>
+
+                <div class="grid-2" style="margin-bottom: 20px;">
+                    <div class="content-box">
+                        <h5 style="color: #fff; margin-top:0;">// 2.3_PIE_DE_PLAYA_(INITIAL_ACCESS)</h5>
+                        <p style="font-size: 0.9rem; color: #ccc;">Analizando exhaustivamente la estructura de directorios, se localizaron credenciales y vectores que facilitaron la inyección de comandos. Esto derivó en la obtención de una <em>Shell</em> interactiva de bajos privilegios.</p>
+                    </div>
+                    <div class="content-box">
+                        <h5 style="color: #fff; margin-top:0;">// 2.4_ELEVACIÓN_DE_PRIVILEGIOS</h5>
+                        <p style="font-size: 0.9rem; color: #ccc;">Con acceso de usuario estándar, se ejecutó una enumeración local del sistema. Se explotó un fallo de configuración crítica que permitió saltar al usuario <strong>Root (UID 0)</strong>, obteniendo el control absoluto.</p>
+                    </div>
+                </div>
+
+                <h4 style="color: var(--terminal-green); border-bottom: 1px dashed #333; padding-bottom: 5px;">> 03_EVIDENCIA_VIDEOGRÁFICA</h4>
+                <div style="background: rgba(0,0,0,0.5); padding: 15px; border: 1px solid var(--border-dim); margin-bottom: 20px;">
+                    <p style="margin-bottom: 15px; color: #ccc;">> Ejecución del ataque paso a paso capturada en video:</p>
+                    
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 2px solid var(--terminal-green); box-shadow: 0 0 15px rgba(0,255,0,0.2);">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                                src="https://www.youtube.com/embed/1ih3WGAv1TM" 
+                                title="Demostración Proyecto 1 - SnakeOil" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <h4 style="color: var(--terminal-green); border-bottom: 1px dashed #333; padding-bottom: 5px;">> 04_ANÁLISIS_POST_MORTEM</h4>
+                <div class="terminal-box" style="margin-bottom: 20px;">
+                    <p>La resolución de esta máquina demuestra de manera fáctica el efecto dominó que tiene una mala configuración. Un simple directorio web mal protegido fue la chispa que desencadenó el compromiso total del servidor.</p>
+                    <p style="color: var(--terminal-green);"><strong>Mitigación recomendada:</strong> Para blindar estos sistemas en entornos corporativos, es imperativo aplicar segmentación de red estricta, políticas de privilegios mínimos (Zero Trust) y sanitización constante de servicios web expuestos.</p>
+                </div>
+
+                <h4 style="color: var(--terminal-green); border-bottom: 1px dashed #333; padding-bottom: 5px;">> 05_DATOS_DEL_OBJETIVO</h4>
+                <div class="content-box">
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li>> <strong>Target:</strong> SnakeOil (DigitalWorld.local)</li>
+                        <li>> <strong>Fuente Oficial VulnHub:</strong> <a href="https://www.vulnhub.com/entry/digitalworldlocal-snakeoil,738/" target="_blank" style="color: var(--nixie-glow); text-decoration: none; border-bottom: 1px dashed var(--nixie-glow);">Enlace a la Máquina Virtual</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div id="proyecto2" class="tab-content" style="display: none;">
+                
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <a href="Proyecto_2.pdf" download class="cyber-btn" style="display: inline-block; width: auto; max-width: 90%; padding: 10px 30px; font-size: 1rem; border-width: 1px;">
+                        <i class="Proyecto_2pdf"></i> [ DESCARGAR PDF ORIGINAL - PR_02 ]
+                    </a>
+                </div>
+
+                <div class="content-box" style="border-color: var(--nixie-glow); margin-bottom: 25px;">
+                    <h3 style="color: var(--nixie-glow); margin-top: 0;">// PR_02: INVESTIGACIÓN CORPORATIVA - GESTIÓN DEL RIESGO HUMANO EN LA SIMULACIÓN DE PHISHING</h3>
+                </div>
+
+                <h4 style="color: var(--terminal-green); border-bottom: 1px dashed #333; padding-bottom: 5px;">> 01_FUNDAMENTACIÓN_TÉCNICA_DEL_RIESGO_HUMANO</h4>
+                <div class="terminal-box" style="margin-bottom: 20px;">
+                    <p>> En el panorama contemporáneo de la ciberseguridad, la asimetría entre defensas tecnológicas y susceptibilidad psicológica ha redefinido los vectores de ataque. Históricamente, las organizaciones invertían en firewalls, EDR y Zero Trust, pero los actores de amenazas han redirigido sus esfuerzos al componente más maleable: el factor humano.</p>
+                    <p>> La evidencia global subraya que más del 90% de las brechas exitosas se originan en correos de phishing o ingeniería social. Tradicionalmente, se dependía de los programas de Concienciación sobre Seguridad (SAT) anuales. Sin embargo, estos sufren por la "Curva del Olvido", donde se pierde hasta el 79% de la información adquirida en 30 días sin refuerzo contextual continuo.</p>
+                    <p>> La industria ha pivotado hacia la <strong>Gestión del Riesgo Humano (HRM)</strong>. Investigaciones indican que el riesgo está muy concentrado: aproximadamente el 8% de los usuarios causan el 80% de los incidentes.</p>
+                </div>
+
+                <h4 style="color: var(--terminal-green); border-bottom: 1px dashed #333; padding-bottom: 5px;">> 02_EVOLUCIÓN_DE_MÉTRICAS_Y_ESCALA_NIST</h4>
+                <div class="grid-2" style="margin-bottom: 20px;">
+                    <div class="content-box">
+                        <h5 style="color: #fff; margin-top:0;">// KPIs_DE_NUEVA_GENERACIÓN</h5>
+                        <p style="font-size: 0.85rem; color: #ccc; margin-bottom: 10px;">La obsoleta "tasa de clics" (click rate) genera puntos ciegos. Las arquitecturas maduras usan:</p>
+                        <ul class="binary-list" style="font-size: 0.85rem;">
+                            <li>> <strong>Tasa de Reporte:</strong> Evalúa el % de usuarios que utilizan botones de alerta (Phish Alert) para notificar al SOC (objetivo >70%).</li>
+                            <li>> <strong>Tiempo de Reporte:</strong> Indicativo de una fuerza laboral vigilante (objetivo <15 min).</li>
+                            <li>> <strong>Tasa de Ingreso de Credenciales:</strong> Representa el resultado más severo simulando un compromiso real.</li>
+                            <li>> <strong>Tasa de Reincidencia:</strong> Cohorte de alto riesgo que falla consistentemente.</li>
+                            <li>> <strong>Behavioral Risk Score (BRS):</strong> Amalgama algorítmica que consolida interacciones y reportes.</li>
+                        </ul>
+                    </div>
+                    <div class="content-box">
+                        <h5 style="color: #fff; margin-top:0;">// ESCALA_PHISH_DEL_NIST</h5>
+                        <p style="font-size: 0.85rem; color: #ccc;">Marco analítico para estandarizar la dificultad de los correos (Nota Técnica TN-2276):</p>
+                        <ul class="binary-list" style="font-size: 0.85rem;">
+                            <li>> <strong>Componente 1 (Indicios):</strong> Cuantifica errores, indicadores técnicos, presentación visual, lenguaje y tácticas de ingeniería social. Contraintuitivamente, <em>menos</em> indicios (1 a 8) hacen que el correo sea más difícil de detectar.</li>
+                            <li>> <strong>Componente 2 (Alineación de la Premisa):</strong> Evalúa qué tan bien se adapta la narrativa del ataque al contexto operativo diario y tecnológico del objetivo.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4 style="color: var(--terminal-green); border-bottom: 1px dashed #333; padding-bottom: 5px;">> 03_ANÁLISIS_INDIVIDUAL_DE_PLATAFORMAS</h4>
+                
+                <div class="terminal-box" style="margin-bottom: 20px;">
+                    <h5 style="color: var(--nixie-glow); margin-top: 0;">1. HOXHUNT</h5>
+                    <p style="font-size: 0.9rem;">Representa la vanguardia en IA adaptativa y gamificación cognitiva. Rechaza campañas genéricas por rutas hiperpersonalizadas. Extrae IOCs de amenazas reales e integra refuerzo positivo inmediato.</p>
+                    
+                    <h5 style="color: var(--nixie-glow);">2. PROOFPOINT (SAT)</h5>
+                    <p style="font-size: 0.9rem;">Aborda la concienciación desde la seguridad perimetral. Convierte automáticamente intentos reales de malware interceptados en plantillas de simulación. Destaca en identificar Personas Muy Atacadas (VAPs).</p>
+                    
+                    <h5 style="color: var(--nixie-glow);">3. KNOWBE4</h5>
+                    <p style="font-size: 0.9rem;">El gigante del mercado con la mayor biblioteca de contenidos. Destaca por sus "Smart Groups" para automatizar campañas correctivas. Ideal para cumplimiento normativo, aunque puede sufrir de "estancamiento" a largo plazo.</p>
+                    
+                    <h5 style="color: var(--nixie-glow);">4. COFENSE (PHISHME)</h5>
+                    <p style="font-size: 0.9rem;">Aborda el riesgo como un flujo de Respuesta a Incidentes (IR). Utiliza a los usuarios como red de sensores para el SOC mediante <em>Cofense Triage</em> y feeds 100% verificados por humanos.</p>
+
+                    <h5 style="color: var(--nixie-glow);">5. PHISHED.IO</h5>
+                    <p style="font-size: 0.9rem;">Busca la Tasa Cero de Incidentes (ZIR) delegando el trabajo a algoritmos GenAI que deciden cadencia y dificultad. Emplea un asistente en bandeja de entrada y calcula dinámicamente el Behavioral Risk Score.</p>
+
+                    <h5 style="color: var(--nixie-glow);">6. NINJIO</h5>
+                    <p style="font-size: 0.9rem;">Combate la apatía usando episodios animados estilo "Hollywood". Su algoritmo genera un "Perfil de Susceptibilidad Emocional" evaluando debilidades ante urgencia, curiosidad u oportunidad.</p>
+
+                    <h5 style="color: var(--nixie-glow);">7. MIMECAST</h5>
+                    <p style="font-size: 0.9rem;">Enfocado en Intervenciones Justo a Tiempo (JIT). Si el empleado exhibe comportamiento de riesgo (ej. compartir datos críticos), el sistema lo interrumpe entregando un "nudge" formativo contextual instantáneo.</p>
+
+                    <h5 style="color: var(--nixie-glow);">8. INFOSEC IQ</h5>
+                    <p style="font-size: 0.9rem;">Riguroso enfoque académico e interoperabilidad. Su capacidad SCORMaaS permite incrustar las simulaciones directamente en los Sistemas de Gestión de Aprendizaje (LMS) empresariales como Workday.</p>
+                </div>
+
+                <h4 style="color: var(--terminal-green); border-bottom: 1px dashed #333; padding-bottom: 5px;">> 04_TABLA_TÉCNICA_COMPARATIVA</h4>
+                <div class="table-responsive" style="margin-bottom: 25px;">
+                    <table class="cyber-table">
+                        <thead>
+                            <tr>
+                                <th>Plataforma</th>
+                                <th>Criterios Analíticos</th>
+                                <th>Integración Técnica</th>
+                                <th>Enfoque Ético / Cultural</th>
+                                <th>Limitaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="highlight">Hoxhunt</td>
+                                <td>Riesgo conductual automatizado, seguimiento longitudinal, tasas de reporte reales.</td>
+                                <td>Integración nativa con Microsoft 365 / Google Workspace.</td>
+                                <td>Fomenta seguridad psicológica mediante gamificación.</td>
+                                <td>Exige cambio cultural profundo hacia la gamificación.</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">Proofpoint</td>
+                                <td>Rastreo avanzado de VAPs, métricas basadas en exposición a inteligencia real.</td>
+                                <td>Integración profunda con Email Security y DLP. Cuadros API SOC/SOAR.</td>
+                                <td>Sin castigos; simulaciones altamente realistas y técnicas.</td>
+                                <td>Alto costo de entrada y complejidad si no se usa todo su portafolio.</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">KnowBe4</td>
+                                <td>Métricas masivas de cumplimiento, Phish-prone percentage.</td>
+                                <td>Azure AD, SSO, Smart Groups dinámicos.</td>
+                                <td>Enfoque híbrido; diseño tradicional que puede percibirse punitivo.</td>
+                                <td>Interfaz compleja; riesgo de estancamiento en aprendizaje.</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">Cofense</td>
+                                <td>Tasas de clasificación de incidentes, resiliencia frente a falsos positivos.</td>
+                                <td>Integraciones IR (Splunk, Sentinel), MISP para inteligencia de red.</td>
+                                <td>Empodera al usuario como informante activo, elevando moral.</td>
+                                <td>Exige SOC maduro capaz de digerir el volumen de reportes.</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">Phished</td>
+                                <td>BRS continuo, Tasa Cero de Incidentes (ZIR).</td>
+                                <td>Asistente nativo. Integración Workspace/M365 vía delegación API.</td>
+                                <td>El fallo detona nanolearning preventivo, sin represalias.</td>
+                                <td>Automatización extrema tipo "caja negra" que limita el control manual.</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">NINJIO</td>
+                                <td>Perfil de Susceptibilidad Emocional. Algoritmo NINJIO Risk.</td>
+                                <td>Integración estándar LMS, SCORM.</td>
+                                <td>Narrativas humanizadas, minimizando percepción de examen hostil.</td>
+                                <td>Formato exclusivamente animado puede no encajar en sectores muy formales.</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">Mimecast</td>
+                                <td>Análisis de concentración de riesgo (identificación del 8% problemático).</td>
+                                <td>APIs nativas para M. Teams, Slack, SharePoint.</td>
+                                <td>Intervenciones contextuales just-in-time sin engaños sintéticos.</td>
+                                <td>Dependencia altísima de la telemetría de Mimecast Email Security.</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">Infosec IQ</td>
+                                <td>Métricas detalladas basadas en roles, análisis longitudinal.</td>
+                                <td>Líderes en SCORMaaS (Workday), Entra ID, Okta, PhishNotify.</td>
+                                <td>Fomenta el entendimiento académico de las políticas.</td>
+                                <td>Interfaz de biblioteca requiere un curador de contenido dedicado.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4 style="color: var(--terminal-green); border-bottom: 1px dashed #333; padding-bottom: 5px;">> 05_GOBERNANZA_ÉTICA_Y_CONCLUSIÓN_FINAL</h4>
+                <div class="grid-2" style="margin-bottom: 20px;">
+                    <div class="content-box">
+                        <h5 style="color: #fff; margin-top:0;">// DISEÑO_ÉTICO_DE_INGENIERÍA_SOCIAL</h5>
+                        <p style="font-size: 0.9rem; color: #ccc;">Es imperativo abandonar la cultura de "trampa" (gotcha). Humillar a los empleados que fallan destruye la confianza y genera puntos ciegos para el SOC. Además, se deben respetar fronteras morales evitando cebos que exploten crisis personales, notificaciones de despido o vulneraciones a normativas de privacidad como GDPR y CCPA.</p>
+                    </div>
+                    <div class="content-box" style="border-color: var(--nixie-glow);">
+                        <h5 style="color: var(--nixie-glow); margin-top: 0;">// ANÁLISIS_CRÍTICO</h5>
+                        <p style="font-size: 0.9rem; color: #ccc;">El mercado evolucionó irremediablemente hacia la telemetría y la IA. El eslabón más débil nunca ha sido el humano, sino las metodologías genéricas usadas para entrenarlo. Al priorizar la educación "justo a tiempo" y la empatía organizacional, las empresas transforman a sus empleados en sensores defensivos formidables e inteligentes.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="proyecto3" class="tab-content" style="display: none;">
+                </div>
+
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p class="copyright">
+                    © 2026 [Hououin] | CNO V SEGURIDAD INFORMÁTICA
+                </p>
+            </div>
+        </footer>
+
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
