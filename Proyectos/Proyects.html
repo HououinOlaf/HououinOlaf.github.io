@@ -272,10 +272,81 @@
                     </div>
                 </div>
 
+                <!-- SIMULADOR DE PHISHING AÑADIDO AQUÍ -->
+                <h4 style="color: var(--nixie-glow); border-bottom: 1px dashed #333; padding-bottom: 5px; margin-top: 40px;">> 06_SIMULADOR_DE_PHISHING_[INTERFAZ_GRÁFICA]</h4>
+                
+                <div class="quiz-container" id="quiz-container">
+                    
+                    <!-- PANTALLA 1: MENÚ -->
+                    <div id="quiz-menu" style="display: block; text-align: center;">
+                        <h2 class="glitch" data-text="PHISHING_SIMULATOR_OS">PHISHING_SIMULATOR_OS</h2>
+                        <p style="color: #ccc; margin-bottom: 20px;">Pon a prueba tu instinto táctico. Analiza 15 escenarios interactivos simulando clientes reales y determina si representan una amenaza (Phishing) o una comunicación corporativa segura (Legítima).</p>
+                        <button class="cyber-btn" onclick="showQuizRegister()" style="width: 80%; margin-bottom: 15px;">[ INICIAR NUEVA SIMULACIÓN ]</button>
+                        <button class="cyber-btn" onclick="showQuizRanking()" style="width: 80%; background: #333;">[ VER RANKING GLOBAL (LOCAL) ]</button>
+                    </div>
+
+                    <!-- PANTALLA 2: REGISTRO -->
+                    <div id="quiz-register" style="display: none; text-align: center;">
+                        <h3 style="color: var(--terminal-green);">// IDENTIFICACIÓN_DE_OPERARIO</h3>
+                        <p style="color: #ff4500; font-size: 0.85rem; margin-bottom: 15px;">[!] ADVERTENCIA: Ingrese un Alias y un Correo. No es necesario que sean reales, los datos solo se almacenarán localmente en su navegador para la tabla de puntajes.</p>
+                        
+                        <input type="text" id="playerName" placeholder="Ingresa tu Alias..." style="margin-bottom: 15px; width: 80%; padding: 10px; background: #000; color: #0f0; border: 1px solid #0f0;">
+                        <input type="email" id="playerEmail" placeholder="correo@simulacion.com" style="margin-bottom: 20px; width: 80%; padding: 10px; background: #000; color: #0f0; border: 1px solid #0f0;">
+                        
+                        <button class="cyber-btn" onclick="startQuiz()" style="width: 80%;">[ ACCEDER AL SISTEMA ]</button>
+                    </div>
+
+                    <!-- PANTALLA 3: EL JUEGO -->
+                    <div id="quiz-game" style="display: none;">
+                        <div class="quiz-header">
+                            <span style="float: left; color: var(--nixie-glow); font-weight: bold;">NIVEL: <span id="q-level">1/15</span></span>
+                            <span style="float: right; color: var(--terminal-green); font-weight: bold;">SCORE: <span id="q-score">0</span></span>
+                            <div style="clear: both;"></div>
+                        </div>
+
+                        <!-- AQUÍ SE INYECTA LA UI REALISTA -->
+                        <div id="q-content-area"></div>
+
+                        <div id="q-options" style="display: flex; justify-content: space-between;">
+                            <button class="quiz-btn btn-phishing" onclick="checkAnswer(true)"><i class="fas fa-skull"></i> ES PHISHING</button>
+                            <button class="quiz-btn btn-legit" onclick="checkAnswer(false)"><i class="fas fa-shield-check"></i> ES LEGÍTIMO</button>
+                        </div>
+
+                        <div id="q-feedback" class="quiz-feedback">
+                            <h3 id="feedback-title" style="margin-top: 0;"></h3>
+                            <p id="feedback-text"></p>
+                            <button class="cyber-btn" onclick="nextQuestion()" style="margin-top: 15px; width: 100%; border-color: #fff; color: #fff;">[ SIGUIENTE NIVEL >> ]</button>
+                        </div>
+                    </div>
+
+                    <!-- PANTALLA 4: RANKING -->
+                    <div id="quiz-ranking" style="display: none; text-align: center;">
+                        <h2 style="color: var(--nixie-glow);">// FIN_DE_LA_SIMULACIÓN</h2>
+                        <h3 style="color: var(--terminal-green);">PUNTUACIÓN OBTENIDA: <span id="final-score">0</span> / 15</h3>
+                        
+                        <table class="ranking-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>OPERARIO (ALIAS)</th>
+                                    <th>CORREO</th>
+                                    <th>SCORE</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ranking-body">
+                                <!-- Filas del ranking -->
+                            </tbody>
+                        </table>
+
+                        <button class="cyber-btn" onclick="showQuizMenu()" style="margin-top: 20px; width: 80%;">[ VOLVER AL MENÚ PRINCIPAL ]</button>
+                    </div>
+
+                </div>
+
             </div>
 
             <div id="proyecto3" class="tab-content" style="display: none;">
-                </div>
+            </div>
 
         </section>
 

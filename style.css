@@ -465,3 +465,57 @@ footer {
     margin-left: 5px;
     color: #ff4500; /* Naranja rojizo para indicar bloqueo */
 }
+
+/* --- ESTILOS DEL SIMULADOR DE PHISHING --- */
+        .quiz-container { border: 2px solid var(--terminal-green); padding: 20px; background: rgba(0,15,0,0.85); margin-top: 20px; }
+        .quiz-header { text-align: center; border-bottom: 1px dashed var(--terminal-green); padding-bottom: 10px; margin-bottom: 20px; }
+        
+        /* Contenedor dinámico donde se inyecta la UI */
+        #q-content-area { margin-bottom: 20px; }
+
+        /* UI: GMAIL STYLE */
+        .ui-gmail { background: #fff; color: #202124; font-family: 'Roboto', Arial, sans-serif; padding: 25px; border-radius: 8px; border: 1px solid #dadce0; text-align: left; }
+        .ui-gmail .g-subject { font-size: 1.35rem; margin-bottom: 20px; color: #202124; font-weight: 400; }
+        .ui-gmail .g-header { display: flex; align-items: center; margin-bottom: 20px; }
+        .ui-gmail .g-avatar { width: 40px; height: 40px; border-radius: 50%; background: #00796b; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold; margin-right: 15px; }
+        .ui-gmail .g-sender-info { flex-grow: 1; }
+        .ui-gmail .g-name { font-weight: bold; font-size: 0.95rem; }
+        .ui-gmail .g-email { color: #5f6368; font-size: 0.85rem; }
+        .ui-gmail .g-to { color: #5f6368; font-size: 0.8rem; margin-top: 2px; }
+        .ui-gmail .g-body { font-size: 0.95rem; line-height: 1.5; color: #3c4043; }
+
+        /* UI: OUTLOOK STYLE */
+        .ui-outlook { background: #fff; color: #333; font-family: 'Segoe UI', Tahoma, sans-serif; padding: 25px; border-radius: 4px; border-top: 5px solid #0078d4; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: left; }
+        .ui-outlook .o-subject { font-size: 1.4rem; font-weight: 600; margin-bottom: 15px; color: #212121; }
+        .ui-outlook .o-header { display: flex; align-items: center; border-bottom: 1px solid #edebe9; padding-bottom: 15px; margin-bottom: 15px; }
+        .ui-outlook .o-avatar { width: 42px; height: 42px; border-radius: 50%; background: #0078d4; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-right: 15px; }
+        .ui-outlook .o-name { font-weight: 600; font-size: 0.95rem; }
+        .ui-outlook .o-email { color: #605e5c; font-size: 0.85rem; }
+        .ui-outlook .o-body { font-size: 0.95rem; line-height: 1.6; }
+
+        /* UI: SMARTPHONE SMS STYLE */
+        .ui-sms-wrapper { display: flex; justify-content: center; padding: 10px 0; }
+        .ui-sms { background: #f2f2f7; width: 320px; border-radius: 35px; padding: 20px 15px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; border: 10px solid #111; box-shadow: 0 10px 25px rgba(0,0,0,0.8); text-align: left; position: relative;}
+        .ui-sms .s-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 25px; background: #111; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; }
+        .ui-sms .s-header { text-align: center; border-bottom: 1px solid #d1d1d6; padding-top: 15px; padding-bottom: 10px; margin-bottom: 20px; }
+        .ui-sms .s-sender { font-weight: 600; color: #000; font-size: 0.95rem; }
+        .ui-sms .s-phone { font-size: 0.75rem; color: #8e8e93; }
+        .ui-sms .s-bubble { background: #0b84ff; color: #fff; padding: 12px 16px; border-radius: 18px 18px 4px 18px; font-size: 0.95rem; line-height: 1.4; max-width: 85%; margin-left: auto; word-wrap: break-word; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .ui-sms .s-time { text-align: center; font-size: 0.7rem; color: #8e8e93; margin-bottom: 10px; margin-top: -10px;}
+
+        /* Botones de juego */
+        .quiz-btn { padding: 15px 20px; font-size: 1.1rem; cursor: pointer; font-family: 'Share Tech Mono'; border: none; font-weight: bold; width: 48%; transition: 0.3s;}
+        .btn-phishing { background-color: #ff4500; color: #fff; border: 1px solid #ff4500;}
+        .btn-legit { background-color: #27c93f; color: #111; border: 1px solid #27c93f;}
+        .btn-phishing:hover { background-color: transparent; color: #ff4500; }
+        .btn-legit:hover { background-color: transparent; color: #27c93f; }
+        
+        .quiz-feedback { margin-top: 15px; padding: 20px; border: 1px dashed #fff; display: none; background: rgba(0,0,0,0.6); }
+        .ranking-table { width: 100%; text-align: left; border-collapse: collapse; margin-top: 20px; background: rgba(0,0,0,0.5); }
+        .ranking-table th, .ranking-table td { border-bottom: 1px solid var(--terminal-green); padding: 12px; }
+        .ranking-table th { color: var(--nixie-glow); font-size: 1.1rem;}
+
+        /* Falsos links para diseño */
+        .fake-link { color: #0066cc; text-decoration: underline; cursor: pointer; }
+        .fake-btn-red { display: inline-block; background: #e50914; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold; margin: 15px 0;}
+        .fake-btn-blue { display: inline-block; background: #0078d4; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 2px; font-weight: bold; margin: 15px 0;}
