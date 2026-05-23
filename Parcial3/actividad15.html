@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 15: Phishing SET | CNO V</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../style.css"> 
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <div class="container">
+        
+        <header>
+            <div class="header-top">
+                <div class="user-info">
+                    <h1 class="glitch" data-text="ACT.15: CAMPAÑA DE PHISHING (SET)">ACT.15: CAMPAÑA DE PHISHING (SET)</h1>
+                    <p class="subtitle">> TEMA: <span class="highlight">INGENIERÍA SOCIAL Y EXPLOTACIÓN DE VULNERABILIDADES</span></p>
+                    <p class="subtitle">> EQUIPO: [05] | ALUMNO: [Coronado Noriega Jesús Olaf - 178991]</p>
+                </div>
+                <div style="text-align: right; min-width: 150px;">
+                    <a href="../actividades.html" class="cyber-btn" style="font-size: 0.8rem;">
+                        << VOLVER A LISTA
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="act15-Equipo5.pdf" download class="cyber-btn" style="display: inline-block; width: auto; max-width: 90%; padding: 15px 40px; font-size: 1.1rem; border-width: 2px;">
+                <i class="fas fa-file-pdf"></i> [ DESCARGAR PDF ORIGINAL ]
+            </a>
+        </div>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 01_RESUMEN_EJECUTIVO_Y_ALCANCE</h2>
+            
+            <div class="content-box">
+                <p>> Este reporte documenta la actividad "Creando una campaña de phishing: SET (Social Engineer Toolkit)", desarrollada en un contexto escolar para la asignatura de Seguridad Informática[cite: 24].</p>
+                <p>> La práctica consistió en diseñar y enviar correos simulados de phishing mediante SET, con el propósito de observar cómo un atacante puede explotar factores humanos como autoridad, urgencia y miedo a consecuencias académicas[cite: 25]. La campaña simulada utilizó mensajes relacionados con la seguridad de la cuenta, límite de faltas e irregularidades de reinscripción[cite: 26].</p>
+                <p>> En cada caso se analizaron los elementos que aumentan la credibilidad del engaño, los indicadores técnicos visibles y las medidas de prevención aplicables a estudiantes e instituciones[cite: 27].</p>
+            </div>
+
+            <div class="terminal-box" style="margin-top: 20px;">
+                <h3 style="color: var(--terminal-green); margin-top: 0;">// LÍMITES Y CONSIDERACIONES ÉTICAS</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 15px;">La actividad se considera válida únicamente bajo un contexto académico controlado[cite: 33]. Ejecutarla sin autorización puede afectar cuentas, datos personales, infraestructura institucional y confianza de los usuarios[cite: 35]. Los límites de seguridad establecidos fueron:</p>
+                <ul class="binary-list" style="font-size: 0.9rem;">
+                    <li>> No almacenar contraseñas reales ni información de sesión de usuarios[cite: 46].</li>
+                    <li>> No utilizar dominios, logos o cuentas institucionales reales sin autorización expresa[cite: 47].</li>
+                    <li>> No enviar campañas masivas fuera del grupo o alcance aprobado[cite: 48].</li>
+                    <li>> No publicar evidencias con datos personales en espacios abiertos[cite: 49].</li>
+                    <li>> Orientar el reporte a defensa, concientización y mejora de controles[cite: 50].</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 02_MARCO_TEÓRICO_Y_VECTORES_DE_ATAQUE</h2>
+            <div class="grid-2">
+                <div class="content-box">
+                    <h3 style="color: var(--nixie-glow); margin-top:0;">// PHISHING E INGENIERÍA SOCIAL</h3>
+                    <p style="font-size: 0.9rem;">El phishing es una técnica de ingeniería social en la que el atacante intenta engañar a una persona para que realice una acción perjudicial: ingresar credenciales, abrir enlaces, descargar archivos, autorizar accesos o revelar información[cite: 62]. La ingeniería social no depende únicamente de vulnerabilidades técnicas, su fuerza está en manipular decisiones humanas[cite: 65].</p>
+                    <p style="font-size: 0.9rem; color: #ccc;">En las evidencias de esta práctica se observan tres disparadores psicológicos relevantes[cite: 66]:</p>
+                    <ul class="binary-list" style="font-size: 0.85rem;">
+                        <li>> <strong>Autoridad:</strong> el mensaje aparenta provenir de servicios escolares o seguridad institucional[cite: 67].</li>
+                        <li>> <strong>Urgencia:</strong> se establece una ventana de tiempo reducida para actuar[cite: 71].</li>
+                        <li>> <strong>Miedo a pérdida:</strong> se amenaza con suspensión de cuenta, baja temporal o pérdida de derecho a examen[cite: 72].</li>
+                    </ul>
+                </div>
+                <div class="content-box">
+                    <h3 style="color: var(--nixie-glow); margin-top:0;">// THE SOCIAL-ENGINEER TOOLKIT (SET)</h3>
+                    <p style="font-size: 0.9rem;">SET es una herramienta utilizada en laboratorios de seguridad para simular escenarios de ingeniería social[cite: 74]. Permite construir vectores de ataque controlados como correos, páginas clonadas, payloads o enlaces[cite: 75].</p>
+                    <p style="font-size: 0.9rem;">En esta práctica se utilizó el módulo de correo electrónico (Mass Mailer Attack), una de las modalidades más comunes porque permite distribuir mensajes con apariencia institucional, incluir enlaces externos y presionar al usuario mediante asuntos urgentes[cite: 78]. El riesgo no radica solo en la herramienta técnica, sino en la combinación entre un pretexto creíble, la identidad aparente del remitente y la falta de validación del destinatario[cite: 79].</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 03_DISEÑO_DE_LA_CAMPAÑA_SIMULADA</h2>
+            <p style="margin-bottom: 20px; color: #ccc;">> La campaña se construyó con tres variantes de mensaje. Todas mantienen una temática escolar porque ese contexto resulta creíble para estudiantes universitarios y aprovecha procesos que suelen generar presión[cite: 81].</p>
+            
+            <div class="table-responsive">
+                <table class="cyber-table">
+                    <thead>
+                        <tr>
+                            <th>Variante</th>
+                            <th>Pretexto de Ingeniería Social</th>
+                            <th>Riesgo Buscado (Objetivo del Atacante)</th>
+                            <th>Nivel de Riesgo Estimado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="highlight">Seguridad de cuenta</td>
+                            <td>Aviso de actividad inusual y supuesta vinculación obligatoria de seguridad[cite: 82].</td>
+                            <td>Inducir al usuario a validar identidad mediante un enlace externo[cite: 82].</td>
+                            <td><span style="color: #ff4500;">Alto:</span> Combina autoridad tecnológica, amenaza de inhabilitación y solicitud de validación[cite: 259].</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Límite de faltas</td>
+                            <td>Alerta de inasistencias superiores al porcentaje permitido[cite: 82].</td>
+                            <td>Generar urgencia por miedo a perder derecho a examen ordinario[cite: 82].</td>
+                            <td><span style="color: #ff4500;">Alto:</span> Ataca un miedo académico directo. El plazo corto incrementa la presión[cite: 259].</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Reinscripción</td>
+                            <td>Supuesta irregularidad en el estatus de inscripción del ciclo escolar[cite: 82].</td>
+                            <td>Forzar una acción rápida para evitar suspensión de materias o acceso a plataforma[cite: 82].</td>
+                            <td><span style="color: #ffbd2e;">Medio-Alto:</span> Usa una consecuencia seria, aunque puede ser detectado revisando el dominio[cite: 259].</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size: 0.85rem; color: #666; margin-top: 10px;">> Los mensajes se diseñaron con tono formal, estructura institucional y consecuencias directas para aumentar la credibilidad inicial[cite: 85, 86].</p>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 04_EJECUCIÓN_Y_EVIDENCIA_TÉCNICA</h2>
+            
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span style="margin-left: 10px;">Flujo de Configuración en SET (Social Engineer Toolkit) [cite: 88, 92, 93, 94, 95]</span>
+                </div>
+                <div class="terminal-body" style="font-size: 0.85rem;">
+                    <span class="comment"># 1. Selección del vector de correo dentro de SET.</span><br>
+                    <span class="prompt">set></span> <span class="command">5</span> <span class="output"># Mass Mailer Attack</span><br>
+                    <span class="prompt">set:mailer></span> <span class="command">1</span> <span class="output"># E-Mail Attack Single Email Address</span><br>
+                    <span class="prompt">set:phishing></span> <span class="command">2</span> <span class="output"># One-Time Use Email Template</span><br><br>
+                    
+                    <span class="comment"># 2. Redacción de asunto, cuerpo HTML y pretexto escolar.</span><br>
+                    <span class="prompt">set:phishing></span> Subject of the email: NOTIFICACIÓN DE SEGURIDAD<br>
+                    <span class="prompt">set:phishing></span> Send the message as html or plain? 'h' or 'p' [p]: h<br>
+                    <span class="prompt">set:phishing></span> Enter the body of the message, type END (capitals) when finished:<br>
+                    <span class="output">&lt;html&gt;...&lt;body&gt;Estimado usuario es necesario hacer una vinculación de seguridad...&lt;/body&gt;&lt;/html&gt;</span><br>
+                    <span class="prompt">set:phishing></span> END<br><br>
+
+                    <span class="comment"># 3. Configuración del remitente visible y servidor SMTP.</span><br>
+                    <span class="prompt">set:phishing></span> Send email to: 180370@upslp.edu.mx<br>
+                    <span class="prompt">set:phishing></span> 2 <span class="output"># Use your own server or open relay</span><br>
+                    <span class="prompt">set:phishing></span> From address (ex: moo@example.com): 181737@upslp.edu.mx<br>
+                    <span class="prompt">set:phishing></span> The FROM NAME the user will see: León Antonio Navarro González<br>
+                    <span class="prompt">set:phishing></span> SMTP email server address: 127.0.1.1<br>
+                    <span class="prompt">set:phishing></span> Port number for the SMTP server [25]: 1025<br><br>
+
+                    <span class="comment"># 4. Confirmación de envío.</span><br>
+                    <span class="output">[*] SET has finished sending the emails</span><br>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 05_ANÁLISIS_DEFENSIVO_E_INDICADORES</h2>
+            <p style="margin-bottom: 20px; color: #ccc;">> La campaña demuestra que un correo visualmente simple puede ser suficiente para generar riesgo si explota la presión académica[cite: 250]. A continuación se presentan las señales claras que permitirían detectar el ataque[cite: 251]:</p>
+            
+            <div class="table-responsive">
+                <table class="cyber-table">
+                    <thead>
+                        <tr>
+                            <th>Indicador Detectado</th>
+                            <th>Observación en la Evidencia</th>
+                            <th>Interpretación Defensiva</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="highlight">Remitente no verificable</td>
+                            <td>Se simula un nombre institucional, pero la dirección no prueba que el mensaje sea legítimo[cite: 252].</td>
+                            <td>El usuario debe revisar dominio, firma y canal oficial, no confiar solo en el nombre visible[cite: 252].</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Cuenta genérica</td>
+                            <td>Las variantes usan remitentes con apariencia de área escolar que no corresponden al dominio formal[cite: 252].</td>
+                            <td>Una universidad se comunica desde dominios oficiales y consistentes, no cuentas genéricas[cite: 252].</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Lenguaje de urgencia</td>
+                            <td>Se menciona bloqueo, límite de tiempo, baja temporal o pérdida de derecho académico[cite: 252].</td>
+                            <td>La urgencia es un disparador diseñado para reducir el análisis crítico del usuario[cite: 252].</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Enlace externo/acortado</td>
+                            <td>Se observan ligas externas (ej. soporte-verificacion...) y acortadas dentro del mensaje[cite: 252].</td>
+                            <td>Las ligas acortadas y dominios no institucionales deben considerarse altamente sospechosos[cite: 252].</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Validación de identidad</td>
+                            <td>El correo pide continuar un proceso de vinculación o confirmación dando clic a un enlace[cite: 252].</td>
+                            <td>Cualquier solicitud de inicio de sesión debe verificarse entrando manualmente al portal oficial[cite: 252].</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 06_CONTROLES_RECOMENDADOS_Y_CONCLUSIONES</h2>
+            
+            <div class="grid-2" style="margin-bottom: 20px;">
+                <div class="content-box">
+                    <h3 style="color: var(--nixie-glow); margin-top:0;">// CONTROLES PARA USUARIOS</h3>
+                    <ul class="binary-list" style="font-size: 0.85rem;">
+                        <li>> No abrir enlaces de correos que amenacen con consecuencias inmediatas sin verificar en el portal oficial[cite: 262].</li>
+                        <li>> Revisar el dominio completo del remitente, no solo el nombre visible[cite: 263].</li>
+                        <li>> Desconfiar de enlaces acortados cuando el trámite supuestamente sea institucional[cite: 264].</li>
+                        <li>> No ingresar contraseña después de abrir un enlace recibido por correo. Escribir manualmente la URL[cite: 265, 266].</li>
+                        <li>> Reportar correos sospechosos al área correspondiente antes de reenviarlos[cite: 267].</li>
+                    </ul>
+                </div>
+                <div class="content-box">
+                    <h3 style="color: var(--nixie-glow); margin-top:0;">// CONTROLES INSTITUCIONALES</h3>
+                    <ul class="binary-list" style="font-size: 0.85rem;">
+                        <li>> Implementar y monitorear SPF, DKIM y DMARC para reducir suplantación de dominio[cite: 269].</li>
+                        <li>> Usar campañas periódicas de concientización éticas con ejemplos reales[cite: 270].</li>
+                        <li>> Aplicar Autenticación Multifactor (MFA) en portales escolares y cuentas institucionales[cite: 273].</li>
+                        <li>> Bloquear o advertir sobre URL acortadas y dominios recién creados[cite: 272].</li>
+                        <li>> Mantener plantillas oficiales de comunicación para facilitar el reconocimiento de anomalías[cite: 274].</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="terminal-box" style="border-color: var(--terminal-green);">
+                <h3 style="color: var(--terminal-green); margin-top: 0;">// CONCLUSIÓN_FINAL_DEL_LABORATORIO</h3>
+                <p style="font-size: 0.95rem; line-height: 1.6; color: #ccc;">
+                    La práctica evidencia que el usuario sigue siendo un punto crítico en la seguridad informática[cite: 289]. Un correo con estructura sencilla puede generar un riesgo inmenso si utiliza elementos de autoridad, urgencia y miedo a consecuencias académicas[cite: 290]. La parte técnica de SET facilita la simulación, pero el éxito del engaño depende principalmente del contexto psicológico del mensaje[cite: 291].<br><br>
+                    
+                    El aprendizaje principal es directo: una institución puede tener excelentes herramientas tecnológicas, pero si sus usuarios carecen de criterios de validación, una campaña de ingeniería social puede comprometer cuentas, información académica o accesos internos[cite: 295]. La defensa no debe depender únicamente de filtros automatizados, sino combinar controles técnicos, capacitación, autenticación multifactor y canales claros de verificación[cite: 293, 294].
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p class="copyright">
+                    © 2026 [Hououin] | CNO V SEGURIDAD INFORMÁTICA
+                </p>
+            </div>
+        </footer>
+
+    </div>
+    
+    <script src="../script.js"></script>
+    
+</body>
+</html>

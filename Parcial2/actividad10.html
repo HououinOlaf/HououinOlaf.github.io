@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 10: Ciberseguridad en una Mirada | CNO V</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style2.css"> 
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <div class="container">
+        
+        <header>
+            <div class="header-top">
+                <div class="user-info">
+                    <h1 class="glitch" data-text="ACT.10: CIBERSEGURIDAD EN UNA MIRADA">ACT.10: CIBERSEGURIDAD EN UNA MIRADA</h1>
+                    <p class="subtitle">> TEMA: <span class="highlight">CISCO NETWORKING ACADEMY - MÓDULO 2</span></p>
+                    <p class="subtitle">> EQUIPO: [05] | ALUMNO: [Coronado Noriega Jesús Olaf - 178991]</p>
+                </div>
+                <div style="text-align: right; min-width: 150px;">
+                    <a href="../actividades.html" class="cyber-btn" style="font-size: 0.8rem;">
+                        << VOLVER A LISTA
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="act10-Equipo5.pdf" download class="cyber-btn" style="display: inline-block; width: auto; max-width: 90%; padding: 15px 40px; font-size: 1.1rem; border-width: 2px;">
+                <i class="fas fa-file-pdf"></i> [ DESCARGAR PDF ORIGINAL ]
+            </a>
+        </div>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 01_CONCEPTOS_FUNDAMENTALES</h2>
+            <div class="grid-2">
+                <div class="content-box">
+                    <h3 style="color: var(--nixie-glow); margin-top:0;">// AMENAZA_Y_VULNERABILIDAD</h3>
+                    <p>> <strong>Amenaza:</strong> Peligro potencial capaz de comprometer la seguridad de un sistema, una red o la información operativa de una organización.</p>
+                    <p>> <strong>Vulnerabilidad:</strong> Debilidad inherente en el diseño, configuración, implementación o conducta humana susceptible a ser aprovechada.</p>
+                </div>
+                <div class="content-box">
+                    <h3 style="color: var(--nixie-glow); margin-top:0;">// EXPLOIT_(EXPLOTACIÓN)</h3>
+                    <p>> Técnica, herramienta o fragmento de código diseñado para aprovechar vulnerabilidades y ejecutar acciones hostiles.</p>
+                    <p style="color: #888; font-size: 0.85rem;">[ Actor de Amenaza -> Vulnerabilidad -> Explotación -> Impacto Crítico ]</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 02_TÉCNICAS_DE_ATAQUE_Y_MITIGACIÓN</h2>
+            <p style="margin-bottom: 20px;">> Análisis estratégico de los principales vectores de ataque corporativos.</p>
+            
+            <div class="accordion-wrapper">
+                <div class="accordion-item">
+                    <button class="accordion-btn active" onclick="toggleAccordion(this)">
+                        [VECTOR_01] Ingeniería Social
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content" style="display: block;">
+                        <div class="lab-info">
+                            <p>> <strong style="color: var(--nixie-glow);">Definición:</strong> Manipulación del usuario para engañarlo y obtener acceso no autorizado.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Riesgo:</strong> Robo de credenciales e infiltración silenciosa a la red interna.</p>
+                            <p>> <strong style="color: var(--terminal-green);">Mitigación:</strong> Implementar una cultura Zero-Trust (Confianza Cero) y Autenticación Multifactor (MFA).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [VECTOR_02] Malware Avanzado (Ransomware)
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <p>> <strong style="color: var(--nixie-glow);">Definición:</strong> Código malicioso ofuscado que infiltra, altera o secuestra los recursos del sistema.</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Riesgo:</strong> Cifrado masivo de datos operativos, exigencia de rescate (Ransomware).</p>
+                            <p>> <strong style="color: var(--terminal-green);">Mitigación:</strong> Implementación de soluciones EDR (Endpoint Detection and Response) y políticas rigurosas de respaldos offsite.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [VECTOR_03] Ataques DDoS (Denegación de Servicio)
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <p>> <strong style="color: var(--nixie-glow);">Definición:</strong> Saturación de un servicio mediante tráfico masivo distribuido proveniente de múltiples fuentes (Botnets).</p>
+                            <p>> <strong style="color: var(--nixie-glow);">Riesgo:</strong> Caída técnica del servicio y disrupción severa de la operatividad del negocio.</p>
+                            <p>> <strong style="color: var(--terminal-green);">Mitigación:</strong> Aplicación de filtrado dinámico de paquetes y arquitecturas de red resilientes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 03_LA_TRÍADA_CIA_E_IMPACTO_GLOBAL</h2>
+            <div class="tech-dashboard" style="margin-bottom: 20px;">
+                <div class="tech-stat">
+                    <span class="label">CONFIDENCIALIDAD</span>
+                    <span class="value" style="font-size: 0.9rem; font-weight: normal; color: #ccc;">Protección rigurosa contra accesos no autorizados.</span>
+                </div>
+                <div class="tech-stat">
+                    <span class="label">INTEGRIDAD</span>
+                    <span class="value" style="font-size: 0.9rem; font-weight: normal; color: #ccc;">Información exacta, verificable e inalterada.</span>
+                </div>
+                <div class="tech-stat">
+                    <span class="label">DISPONIBILIDAD</span>
+                    <span class="value" style="font-size: 0.9rem; font-weight: normal; color: #ccc;">Redes preservadas para operar de forma continua.</span>
+                </div>
+            </div>
+            
+            <div class="content-box" style="border-color: var(--terminal-green);">
+                <h3 style="color: var(--terminal-green); margin-top:0;">// CONCLUSIÓN_DIRECTIVA</h3>
+                <p style="font-size: 0.95rem; line-height: 1.5; color: #ccc;">
+                    La ciberseguridad corporativa exige un enfoque proactivo. Comprender la lógica de los vectores de ataque y cómo impactan en la operatividad, costos legales y reputación, permite diseñar defensas resilientes que protejan el valor estratégico de la organización.
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p class="copyright">
+                    © 2026 [Hououin] | CNO V SEGURIDAD INFORMÁTICA
+                </p>
+            </div>
+        </footer>
+
+    </div>
+    
+    <script src="script2.js"></script>
+    
+</body>
+</html>

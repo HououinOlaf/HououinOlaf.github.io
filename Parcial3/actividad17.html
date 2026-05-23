@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 17: Evaluación CVSS v3.1 | CNO V</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../style.css"> 
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <div class="container">
+        
+        <header>
+            <div class="header-top">
+                <div class="user-info">
+                    <h1 class="glitch" data-text="ACT.17: EVALUACIÓN DE VULNERABILIDADES CON CVSS v3.1">ACT.17: VULNERABILIDADES CON CVSS v3.1</h1>
+                    <p class="subtitle">> TEMA: <span class="highlight">CÁLCULO, MÉTRICAS Y ANÁLISIS DE RIESGO</span></p>
+                    <p class="subtitle">> EQUIPO: [05] | ALUMNO: [Coronado Noriega Jesús Olaf - 178991]</p>
+                </div>
+                <div style="text-align: right; min-width: 150px;">
+                    <a href="../actividades.html" class="cyber-btn" style="font-size: 0.8rem;">
+                        << VOLVER A LISTA
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="act17-Equipo5.pdf" download class="cyber-btn" style="display: inline-block; width: auto; max-width: 90%; padding: 15px 40px; font-size: 1.1rem; border-width: 2px;">
+                <i class="fas fa-file-pdf"></i> [ DESCARGAR PDF ORIGINAL ]
+            </a>
+        </div>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 01_INTRODUCCIÓN_Y_ESCENARIO_BASE</h2>
+            
+            <div class="content-box">
+                <p>> <strong>Propósito de la Evaluación:</strong> El presente documento desarrolla la evaluación de una vulnerabilidad detectada en un sistema web interno mediante el modelo estandarizado CVSS v3.1 (Common Vulnerability Scoring System).</p>
+                <p>> <strong>Enfoque Analítico:</strong> El propósito del análisis no es únicamente obtener un número, sino justificar el riesgo en un contexto organizacional. Se explica por qué la vulnerabilidad conserva relevancia aunque requiera privilegios elevados, qué tipo de atacante podría explotarla y qué implica que el impacto sea bajo en la tríada CIA.</p>
+            </div>
+
+            <div class="terminal-box" style="margin-top: 20px;">
+                <h3 style="color: var(--terminal-green); margin-top: 0;">// CARACTERÍSTICAS TÉCNICAS DEL ESCENARIO</h3>
+                <ul class="binary-list">
+                    <li>> <strong>Vector de ataque:</strong> Puede explotarse a través de la red externa.</li>
+                    <li>> <strong>Complejidad de ataque:</strong> La explotación requiere baja complejidad técnica.</li>
+                    <li>> <strong>Privilegios requeridos:</strong> Se necesitan privilegios administrativos o elevados.</li>
+                    <li>> <strong>Interacción del usuario:</strong> No requiere interacción de una víctima adicional.</li>
+                    <li>> <strong>Alcance (Scope):</strong> No cambia el alcance de la autorización.</li>
+                    <li>> <strong>Impacto en la Tríada CIA:</strong> Bajo impacto en Confidencialidad, Integridad y Disponibilidad.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 02_CONSTRUCCIÓN_DEL_VECTOR_CVSS</h2>
+            <p style="margin-bottom: 20px; color: #ccc;">> Despliegue los módulos para inspeccionar la asignación de métricas y la cadena resultante.</p>
+            
+            <div class="accordion-wrapper">
+
+                <div class="accordion-item">
+                    <button class="accordion-btn active" onclick="toggleAccordion(this)">
+                        [FASE_01] Asignación de Métricas Base
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content" style="display: block;">
+                        <div class="table-responsive">
+                            <table class="cyber-table">
+                                <thead>
+                                    <tr>
+                                        <th>Métrica Base</th>
+                                        <th>Valor Asignado</th>
+                                        <th>Justificación Técnica</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="highlight">Attack Vector (AV)</td>
+                                        <td><strong>Network (N)</strong></td>
+                                        <td>La vulnerabilidad puede explotarse a través de la red sin acceso físico o adyacente.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight">Attack Complexity (AC)</td>
+                                        <td><strong>Low (L)</strong></td>
+                                        <td>Explotación repetible. No depende de condiciones especiales ni estados poco probables del sistema.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight">Privileges Required (PR)</td>
+                                        <td><strong>High (H)</strong></td>
+                                        <td>El atacante necesita privilegios elevados (admin) para detonar la falla.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight">User Interaction (UI)</td>
+                                        <td><strong>None (N)</strong></td>
+                                        <td>No se requiere que la víctima ejecute una acción, abra un archivo o acepte una solicitud.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight">Scope (S)</td>
+                                        <td><strong>Unchanged (U)</strong></td>
+                                        <td>El impacto permanece confinado dentro del mismo componente o dominio de seguridad.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight">Confidentiality (C)</td>
+                                        <td><strong>Low (L)</strong></td>
+                                        <td>Exposición parcial o limitada de la información contenida en el activo.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight">Integrity (I)</td>
+                                        <td><strong>Low (L)</strong></td>
+                                        <td>La alteración de la información o del comportamiento del sistema es acotada.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight">Availability (A)</td>
+                                        <td><strong>Low (L)</strong></td>
+                                        <td>Afectación parcial del servicio, sin interrupción total de las operaciones.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [FASE_02] Cadena Vector y Puntuación Oficial
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="lab-info">
+                            <p>> Con base en la calculadora oficial del FIRST (Forum of Incident Response and Security Teams), la asignación de métricas se consolida en la siguiente cadena y puntuación final.</p>
+                        </div>
+                        
+                        <div class="terminal-code-box" style="margin-top: 15px; border-color: #ffbd2e;">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">FIRST.org CVSS v3.1 Calculator</span></div>
+                            <div class="terminal-body" style="text-align: center; padding: 30px;">
+                                <span class="comment"># Vector String Resultante</span><br>
+                                <span class="command" style="font-size: 1.3rem; letter-spacing: 2px;">CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:L/I:L/A:L</span><br><br>
+                                <span class="comment"># Base Score</span><br>
+                                <span class="prompt" style="font-size: 3rem; color: #ffbd2e; text-shadow: 0 0 15px #ffbd2e;">4.7 (MEDIUM)</span>
+                            </div>
+                        </div>
+
+                        <p style="margin-top: 15px; font-size: 0.95rem; color: #ccc;">
+                            > <strong style="color: var(--terminal-green);">Interpretación Inmediata:</strong> La puntuación base de 4.7 ubica la vulnerabilidad en severidad <strong>Media</strong>. No es un hallazgo crítico, pero tampoco debe ignorarse, porque puede explotarse por red (N), requiere baja complejidad (L) y no necesita interacción del usuario (N).
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 03_ANÁLISIS_DE_RIESGO_E_INTERPRETACIÓN_TÉCNICA</h2>
+            
+            <div class="grid-2">
+                <div class="content-box">
+                    <h3 style="color: var(--nixie-glow); margin-top:0;">// RELEVANCIA PESE A PRIVILEGIOS ALTOS (PR:H)</h3>
+                    <p style="font-size: 0.9rem; color: #ccc;">
+                        Aunque la vulnerabilidad requiere privilegios elevados, sigue siendo relevante porque <strong>ese requisito no elimina el riesgo; solamente reduce el número de atacantes capaces de explotarla directamente</strong>. 
+                        <br><br>
+                        En un entorno real, un atacante puede obtener privilegios altos mediante robo de credenciales, reutilización de contraseñas, sesiones expuestas o escalamiento previo. Una vez obtenidos, la explotación es directa por su vector de red y baja complejidad.
+                    </p>
+                </div>
+
+                <div class="content-box">
+                    <h3 style="color: var(--nixie-glow); margin-top:0;">// PERFIL DEL ACTOR DE AMENAZA</h3>
+                    <p style="font-size: 0.9rem; color: #ccc;">
+                        El atacante más probable sería: <br>
+                        1. Un usuario interno con permisos elevados.<br>
+                        2. Un administrador malicioso.<br>
+                        3. Un exempleado cuya cuenta no fue revocada.<br>
+                        4. Un atacante externo que previamente comprometió una cuenta privilegiada (Phishing/Malware). <br><br>
+                        El riesgo no se limita a amenazas externas, sino también a la <strong>amenaza interna (Insider Threat)</strong>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="table-responsive" style="margin-top: 20px;">
+                <table class="cyber-table">
+                    <thead>
+                        <tr>
+                            <th>Aspecto Organizacional</th>
+                            <th>Análisis de Riesgo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="highlight">Impacto Bajo (Low)</td>
+                            <td>Significa afectaciones parciales: exposición limitada de datos, alteración acotada o degradación menor del servicio. No destruye todo el sistema, pero sí debilita la operación.</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Prioridad de Atención</td>
+                            <td><strong>Media.</strong> Debe corregirse y programarse dentro del proceso de remediación general, priorizándose después de apagar incendios de criticidad Alta o Crítica.</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">Agravantes del Riesgo</td>
+                            <td>El riesgo real aumenta exponencialmente si la organización carece de Autenticación Multifactor (MFA), tiene credenciales compartidas o carece de monitoreo de cuentas administrativas.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 04_ESTRATEGIA_DE_MITIGACIÓN</h2>
+            <div class="terminal-box" style="border-color: var(--terminal-green);">
+                <p style="font-size: 0.95rem; color: #ccc; margin-bottom: 15px;">> Para reducir sistemáticamente el riesgo asociado a esta vulnerabilidad (y mitigar el factor PR:H), se dictaminan las siguientes acciones correctivas:</p>
+                
+                <ul class="binary-list" style="font-size: 0.95rem;">
+                    <li>> <strong>1. Principio de Mínimo Privilegio (POLP):</strong> Limitar los permisos de cada usuario de la aplicación y base de datos a lo estrictamente necesario.</li>
+                    <li>> <strong>2. Auditoría de Cuentas Privilegiadas:</strong> Revisar proactivamente cuentas administrativas activas, compartidas, obsoletas o sin justificación operativa (Cuentas huérfanas).</li>
+                    <li>> <strong>3. Implementación MFA:</strong> Obligar a usar Autenticación Multifactor en todas las cuentas que posean privilegios elevados o acceso a sistemas internos sensibles.</li>
+                    <li>> <strong>4. Monitoreo Activo (SIEM):</strong> Registrar accesos, cambios de configuración y operaciones críticas de los administradores.</li>
+                    <li>> <strong>5. Corrección y Validación:</strong> Aplicar el parche oficial del fabricante o ajuste de configuración, repitiendo las pruebas de pentesting para confirmar que el vector dejó de ser explotable.</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p class="copyright">
+                    © 2026 [Hououin] | CNO V SEGURIDAD INFORMÁTICA
+                </p>
+            </div>
+        </footer>
+
+    </div>
+    
+    <script src="../script.js"></script>
+    
+</body>
+</html>

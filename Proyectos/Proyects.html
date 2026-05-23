@@ -41,8 +41,8 @@
                     [PROYECTO_2]
                 </button>
                 
-                <button class="tab-link disabled-tab">
-                    [PROYECTO_3] // PRÓXIMAMENTE <i class="fas fa-lock"></i>
+                <button class="tab-link" onclick="openParcial(event, 'proyecto3')">
+                    [PROYECTO_3]
                 </button>
             </div>
 
@@ -272,12 +272,10 @@
                     </div>
                 </div>
 
-                <!-- SIMULADOR DE PHISHING AÑADIDO AQUÍ -->
                 <h4 style="color: var(--nixie-glow); border-bottom: 1px dashed #333; padding-bottom: 5px; margin-top: 40px;">> 06_SIMULADOR_DE_PHISHING_[INTERFAZ_GRÁFICA]</h4>
                 
                 <div class="quiz-container" id="quiz-container">
                     
-                    <!-- PANTALLA 1: MENÚ -->
                     <div id="quiz-menu" style="display: block; text-align: center;">
                         <h2 class="glitch" data-text="PHISHING_SIMULATOR_OS">PHISHING_SIMULATOR_OS</h2>
                         <p style="color: #ccc; margin-bottom: 20px;">Pon a prueba tu instinto táctico. Analiza 15 escenarios interactivos simulando clientes reales y determina si representan una amenaza (Phishing) o una comunicación corporativa segura (Legítima).</p>
@@ -285,7 +283,6 @@
                         <button class="cyber-btn" onclick="showQuizRanking()" style="width: 80%; background: #333;">[ VER RANKING GLOBAL (LOCAL) ]</button>
                     </div>
 
-                    <!-- PANTALLA 2: REGISTRO -->
                     <div id="quiz-register" style="display: none; text-align: center;">
                         <h3 style="color: var(--terminal-green);">// IDENTIFICACIÓN_DE_OPERARIO</h3>
                         <p style="color: #ff4500; font-size: 0.85rem; margin-bottom: 15px;">[!] ADVERTENCIA: Ingrese un Alias y un Correo. No es necesario que sean reales, los datos solo se almacenarán localmente en su navegador para la tabla de puntajes.</p>
@@ -296,7 +293,6 @@
                         <button class="cyber-btn" onclick="startQuiz()" style="width: 80%;">[ ACCEDER AL SISTEMA ]</button>
                     </div>
 
-                    <!-- PANTALLA 3: EL JUEGO -->
                     <div id="quiz-game" style="display: none;">
                         <div class="quiz-header">
                             <span style="float: left; color: var(--nixie-glow); font-weight: bold;">NIVEL: <span id="q-level">1/15</span></span>
@@ -304,7 +300,6 @@
                             <div style="clear: both;"></div>
                         </div>
 
-                        <!-- AQUÍ SE INYECTA LA UI REALISTA -->
                         <div id="q-content-area"></div>
 
                         <div id="q-options" style="display: flex; justify-content: space-between;">
@@ -319,7 +314,6 @@
                         </div>
                     </div>
 
-                    <!-- PANTALLA 4: RANKING -->
                     <div id="quiz-ranking" style="display: none; text-align: center;">
                         <h2 style="color: var(--nixie-glow);">// FIN_DE_LA_SIMULACIÓN</h2>
                         <h3 style="color: var(--terminal-green);">PUNTUACIÓN OBTENIDA: <span id="final-score">0</span> / 15</h3>
@@ -334,8 +328,7 @@
                                 </tr>
                             </thead>
                             <tbody id="ranking-body">
-                                <!-- Filas del ranking -->
-                            </tbody>
+                                </tbody>
                         </table>
 
                         <button class="cyber-btn" onclick="showQuizMenu()" style="margin-top: 20px; width: 80%;">[ VOLVER AL MENÚ PRINCIPAL ]</button>
@@ -346,6 +339,129 @@
             </div>
 
             <div id="proyecto3" class="tab-content" style="display: none;">
+                
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <a href="PR03-Equipo5.pdf" download class="cyber-btn" style="display: inline-block; width: auto; max-width: 90%; padding: 10px 30px; font-size: 1rem; border-width: 1px;">
+                        <i class="fas fa-file-pdf"></i> [ DESCARGAR PDF ORIGINAL - PR_03 ]
+                    </a>
+                </div>
+
+                <div class="content-box" style="border-color: var(--nixie-glow); margin-bottom: 25px;">
+                    <h3 style="color: var(--nixie-glow); margin-top: 0;">// PR_03: SGSI BASADO EN ISO/IEC 27001:2022 (APLICADO A UPSLP)</h3>
+                </div>
+
+                <h4 style="color: var(--terminal-green); border-bottom: 1px dashed #333; padding-bottom: 5px;">> 01_RESUMEN_EJECUTIVO_Y_ALCANCE</h4>
+                <div class="terminal-box" style="margin-bottom: 20px;">
+                    <p>> El proyecto desarrolla un Sistema de Gestión de Seguridad de la Información (SGSI) para la Universidad Politécnica de San Luis Potosí (UPSLP), fundamentado estrictamente en la norma internacional ISO/IEC 27001:2022.</p>
+                    <p>> <strong>Delimitación del Alcance:</strong> La intervención se enfoca en proteger los servicios digitales críticos que garantizan la continuidad educativa y administrativa. El perímetro abarca plataformas como el control escolar, correo institucional, red LAN/Wi-Fi, y la infraestructura híbrida (nube y servidores internos).</p>
+                    <p>> <strong>Objetivo Estratégico:</strong> Proteger la confidencialidad, integridad y disponibilidad de los activos frente a amenazas modernas (phishing, ransomware, fuga de información) mediante controles medibles, auditorías internas y un proceso de mejora continua.</p>
+                </div>
+
+                <h4 style="color: var(--terminal-green); border-bottom: 1px dashed #333; padding-bottom: 5px;">> 02_ANÁLISIS_DE_ACTIVOS_Y_GESTIÓN_DE_RIESGOS</h4>
+                <div class="grid-2" style="margin-bottom: 20px;">
+                    <div class="content-box">
+                        <h5 style="color: #fff; margin-top:0;">// INVENTARIO DE ACTIVOS CRÍTICOS</h5>
+                        <p style="font-size: 0.9rem; color: #ccc;">Se documentaron y clasificaron 40 activos institucionales, asignándoles propietarios, procesos dependientes y una valoración basada en la tríada CIA. Destacan:</p>
+                        <ul class="binary-list" style="font-size: 0.85rem;">
+                            <li>> <strong>ACT-INT-01:</strong> Base de datos de Control Escolar (Alta/Alta/Alta).</li>
+                            <li>> <strong>ACT-INT-03:</strong> Servidor de autenticación y Directorio Activo.</li>
+                            <li>> <strong>ACT-EXT-01:</strong> Correo institucional alojado en la nube.</li>
+                        </ul>
+                    </div>
+                    <div class="content-box">
+                        <h5 style="color: #fff; margin-top:0;">// METODOLOGÍA DE RIESGOS</h5>
+                        <p style="font-size: 0.9rem; color: #ccc;">La evaluación de impacto se calculó mediante la fórmula: <code>Riesgo = Probabilidad × Impacto</code>. Se priorizaron las amenazas directas hacia credenciales y continuidad operativa.</p>
+                    </div>
+                </div>
+
+                <div class="table-responsive" style="margin-bottom: 25px;">
+                    <table class="cyber-table">
+                        <thead>
+                            <tr>
+                                <th>ID Riesgo</th>
+                                <th>Amenaza y Vulnerabilidad</th>
+                                <th>Impacto Estimado</th>
+                                <th>Nivel</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="highlight">R-01</td>
+                                <td>Phishing y robo de credenciales en usuarios sin MFA.</td>
+                                <td>Exposición de información y envío de correos fraudulentos.</td>
+                                <td><span style="color: #ff4500;">Crítico (20)</span> </td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">R-02</td>
+                                <td>Interrupción en periodo de inscripción por falta de pruebas de continuidad.</td>
+                                <td>Suspensión de reinscripciones y atención escolar.</td>
+                                <td><span style="color: #ffbd2e;">Alto (15)</span> </td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">R-04</td>
+                                <td>Abuso de red debido a una segmentación insuficiente.</td>
+                                <td>Movimiento lateral y consumo indebido de recursos.</td>
+                                <td><span style="color: #ffbd2e;">Alto (16)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4 style="color: var(--terminal-green); border-bottom: 1px dashed #333; padding-bottom: 5px;">> 03_GOBERNANZA_Y_POLÍTICAS_DE_SEGURIDAD</h4>
+                <div class="terminal-box" style="margin-bottom: 20px;">
+                    <p>> Para garantizar la mitigación estructurada de los riesgos descubiertos, el SGSI dictaminó 10 políticas específicas de aplicación obligatoria (POL-01 a POL-10). Cada directriz cuenta con una línea base medible y se integra a una matriz de responsabilidades (RACI).</p>
+                    
+                    <h5 style="color: var(--nixie-glow); margin-top: 15px;">// POLÍTICAS PRIORITARIAS (CONTROLES)</h5>
+                    <ul class="binary-list">
+                        <li>> <strong>POL-01 (Gestión de Accesos):</strong> Exige la aplicación de Autenticación Multifactor (MFA) en cuentas administrativas e institucionales para neutralizar el Riesgo R-01.</li>
+                        <li>> <strong>POL-04 (Respaldos):</strong> Obliga a mantener pruebas de restauración trimestrales (RPO máximo de 24h) en servidores críticos.</li>
+                        <li>> <strong>POL-09 (Concienciación):</strong> Requiere la ejecución de al menos dos campañas de simulación anti-phishing anuales dirigidas a la comunidad universitaria.</li>
+                    </ul>
+                </div>
+
+                <h4 style="color: var(--terminal-green); border-bottom: 1px dashed #333; padding-bottom: 5px;">> 04_IMPLEMENTACIÓN_OPERATIVA_Y_EVIDENCIA</h4>
+                <div class="grid-2" style="margin-bottom: 20px;">
+                    <div class="content-box">
+                        <h5 style="color: #fff; margin-top:0;">// DESPLIEGUE DEL PILOTO (MFA)</h5>
+                        <p style="font-size: 0.9rem; color: #ccc;">Se diseñó el procedimiento operativo para materializar la POL-01. El proceso incluye la extracción de usuarios privilegiados, validación de dueños, configuración de MFA y monitoreo de logs de sesión.</p>
+                    </div>
+                    <div class="content-box" style="border-color: var(--terminal-green);">
+                        <div class="terminal-code-box" style="margin: 0; border: none; box-shadow: none;">
+                            <div class="terminal-header"><div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div><span>Simulación de Evidencia (EVID-OP-01)</span></div>
+                            <div class="terminal-body" style="padding: 10px; font-size: 0.85rem;">
+                                <span class="comment"># Extracción de cuentas administrativas </span><br>
+                                <span class="prompt">PS ></span> <span class="command">Get-PrivilegedUsers -System Correo InstitucionalRole Admin > cuentas_privilegiadas.csv</span><br><br>
+                                <span class="comment"># Resultado del despliegue </span><br>
+                                <span class="prompt">Output ></span> 18 cuentas detectadas; 14 activas; 3 obsoletas revocadas; 1 proveedor temporal.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 style="color: var(--terminal-green); border-bottom: 1px dashed #333; padding-bottom: 5px;">> 05_AUDITORÍA_INTERNA_E_INCIDENTES_(MEJORA_CONTINUA)</h4>
+                <div class="terminal-box" style="margin-bottom: 20px;">
+                    <h5 style="color: var(--nixie-glow); margin-top: 0;">// GESTIÓN DE INCIDENTES (PHISHING SIMULADO)</h5>
+                    <p style="font-size: 0.9rem;">Se evaluó el comportamiento del SGSI frente a un incidente verosímil: una cuenta administrativa víctima de phishing. La respuesta ejecutiva implicó el bloqueo de sesión, el reset de contraseñas, la preservación de logs y el ajuste inmediato a los controles preventivos.</p>
+                    
+                    <h5 style="color: var(--nixie-glow); margin-top: 15px;">// CAMPAÑA PREVENTIVA INSTITUCIONAL</h5>
+                    <p style="font-size: 0.9rem; margin-bottom: 10px;">Como medida de erradicación cultural, se elaboró una guía para estudiantes y personal administrativo libre de tecnicismos:</p>
+                    <div style="background: rgba(255,255,255,0.05); border-left: 3px solid #ffbd2e; padding: 15px; margin: 10px 0;">
+                        <strong style="color: #ffbd2e; font-size: 1.1rem; display: block; margin-bottom: 5px;">ALTO AL PHISHING: PAUSA - VERIFICA - REPORTA </strong>
+                        <ul class="binary-list" style="font-size: 0.85rem;">
+                            <li>> <strong>1. PAUSA:</strong> No respondas con prisa a correos que amenazan con bloqueos o sanciones.</li>
+                            <li>> <strong>2. VERIFICA:</strong> Revisa el remitente y los dominios. La UPSLP nunca solicitará contraseñas en plataformas externas.</li>
+                            <li>> <strong>3. REPORTA:</strong> Redirige los mensajes sospechosos directamente a la Mesa de Ayuda de TI.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-box" style="border-color: var(--terminal-green); margin-top: 25px;">
+                    <h3 style="color: var(--terminal-green); margin-top: 0;">// CONCLUSIÓN_FINAL_DEL_SGSI</h3>
+                    <p style="font-size: 0.95rem; line-height: 1.5; color: #ccc;">
+                        El valor de este proyecto radica en la trazabilidad: cada riesgo detectado se origina en un activo crítico de la universidad, cada control responde a una política documentada y cada evidencia permite superar una auditoría externa. Este modelo transforma la seguridad informática de un esfuerzo tecnológico reactivo a un pilar de gobierno corporativo proactivo, garantizando la continuidad operativa y la mejora continua en la UPSLP.
+                    </p>
+                </div>
+
             </div>
 
         </section>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad Extra: Ransomware | CNO V</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <div class="container">
+        
+        <header>
+            <div class="header-top">
+                <div class="user-info">
+                    <h1 class="glitch" data-text="ACT.EXTRA: ANATOMÍA DEL RANSOMWARE">ACT.EXTRA: ANATOMÍA DEL RANSOMWARE</h1>
+                    <p class="subtitle">> OPERACIÓN: <span class="highlight">SIMULACIÓN DE SECUESTRO DE DATOS Y RECUPERACIÓN</span></p>
+                    <p class="subtitle">> ALUMNO: [Coronado Noriega Jesús Olaf - 178991]</p>
+                </div>
+                <div style="text-align: right; min-width: 150px;">
+                    <a href="../actividades.html" class="cyber-btn" style="font-size: 0.8rem;">
+                        << VOLVER A LISTA
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 01_MARCO_TEÓRICO_Y_FUNDAMENTOS</h2>
+            
+            <div class="content-box">
+                <h3 style="color: var(--nixie-glow); margin-top:0;">// ¿QUÉ ES EL RANSOMWARE?</h3>
+                <p>> El Ransomware es un tipo de <em>malware</em> (software malicioso) diseñado para negar a un usuario u organización el acceso a sus archivos o sistemas informáticos. Esto se logra típicamente cifrando los datos críticos. Posteriormente, los actores de amenazas exigen el pago de un rescate (ransom), generalmente en criptomonedas como Bitcoin o Monero para mantener el anonimato, a cambio de entregar la clave de descifrado.</p>
+                <p>> En los últimos años, ha evolucionado hacia la <strong>doble extorsión</strong>: los atacantes no solo cifran los datos, sino que primero los exfiltran (roban) y amenazan con publicarlos en la Dark Web si no se cumple con el pago, afectando así tanto la Disponibilidad como la Confidencialidad de la información.</p>
+            </div>
+
+            <div class="grid-2" style="margin-top: 20px;">
+                <div class="content-box">
+                    <h3 style="color: var(--terminal-green); margin-top:0;">// VECTORES DE INFECCIÓN</h3>
+                    <ul class="binary-list" style="font-size: 0.85rem;">
+                        <li>> <strong>Phishing / Spear Phishing:</strong> Correos electrónicos con archivos adjuntos maliciosos (macros de Office, PDFs) o enlaces que descargan <em>droppers</em>.</li>
+                        <li>> <strong>RDP Expuesto:</strong> Fuerza bruta o uso de credenciales comprometidas en el Protocolo de Escritorio Remoto (RDP) expuesto a internet.</li>
+                        <li>> <strong>Explotación de Vulnerabilidades (CVEs):</strong> Aprovechamiento de fallos no parcheados en VPNs, firewalls o servicios web periféricos.</li>
+                    </ul>
+                </div>
+                <div class="content-box">
+                    <h3 style="color: var(--terminal-green); margin-top:0;">// KILL CHAIN DEL RANSOMWARE</h3>
+                    <ul class="binary-list" style="font-size: 0.85rem;">
+                        <li>> <strong>1. Infección:</strong> El malware se ejecuta en la máquina objetivo.</li>
+                        <li>> <strong>2. Ejecución y Persistencia:</strong> Se inyecta en procesos legítimos y se asegura de ejecutarse en cada reinicio.</li>
+                        <li>> <strong>3. Reconocimiento:</strong> Mapea unidades locales y de red para maximizar el daño.</li>
+                        <li>> <strong>4. Cifrado:</strong> Utiliza algoritmos robustos (ej. AES-256 combinado con RSA) para bloquear los archivos.</li>
+                        <li>> <strong>5. Extorsión:</strong> Despliega la nota de rescate (Ransom Note).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 02_DOCUMENTACIÓN_VIDEOGRÁFICA</h2>
+            <div style="background: rgba(0,0,0,0.5); padding: 15px; border: 1px solid var(--border-dim); margin-bottom: 20px;">
+                <p style="color: var(--nixie-glow); margin-bottom: 10px; font-size: 0.9rem;">> REGISTRO DEL LABORATORIO: EJECUCIÓN EN ENTORNO AISLADO (WINDOWS XP)</p>
+                
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 2px solid var(--terminal-green); box-shadow: 0 0 15px rgba(0,255,0,0.2);">
+                    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                            src="https://www.youtube.com/embed/P-GdMnJyC9A" 
+                            title="RW_178991" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 03_ANÁLISIS_DEL_CÓDIGO_OFENSIVO_(SIMULADOR)</h2>
+            <p style="margin-bottom: 20px; color: #ccc;">> A continuación se expone la estructura del script desarrollado. Por motivos de ética profesional y políticas de ciberseguridad, <strong>las rutinas de manipulación y alteración de bytes han sido censuradas</strong>.</p>
+            
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span style="margin-left: 10px;">Archivo: RansomWare_xp.py [CENSURADO]</span>
+                </div>
+                <div class="terminal-body" style="font-size: 0.85rem; max-height: 400px; overflow-y: auto;">
+<pre style="margin: 0; color: #a9b7c6; font-family: 'Share Tech Mono', monospace;">
+<span style="color: #629755; font-style: italic;"># Proyecto: RansomWare (Simulación Controlada)</span>
+<span style="color: #629755; font-style: italic;"># Alumno: Coronado Noriega Jesús Olaf - 178991</span>
+
+<span style="color: #cc7832; font-weight: bold;">import</span> os, sys, platform, ctypes, base64
+<span style="color: #cc7832; font-weight: bold;">import</span> tkinter <span style="color: #cc7832; font-weight: bold;">as</span> tk
+
+<span style="color: #629755; font-style: italic;"># [1] CONFIGURACIÓN DEL PAYLOAD</span>
+<span style="color: #629755; font-style: italic;"># Define qué archivos atacar. Excluye directorios del sistema operativo</span>
+<span style="color: #629755; font-style: italic;"># para no causar un "Blue Screen of Death" (BSOD) y asegurar que el </span>
+<span style="color: #629755; font-style: italic;"># usuario pueda ver la nota de rescate.</span>
+CONFIG = {
+    <span style="color: #6a8759;">"target_extensions"</span>: [<span style="color: #6a8759;">".doc"</span>, <span style="color: #6a8759;">".pdf"</span>, <span style="color: #6a8759;">".txt"</span>, <span style="color: #6a8759;">".xls"</span>, <span style="color: #6a8759;">".json"</span>, <span style="color: #6a8759;">".sql"</span>],
+    <span style="color: #6a8759;">"exclude_directories"</span>: [<span style="color: #6a8759;">"Windows"</span>, <span style="color: #6a8759;">"Program Files"</span>, <span style="color: #6a8759;">"System32"</span>, <span style="color: #6a8759;">"AppData"</span>],
+    <span style="color: #6a8759;">"note_filename"</span>: <span style="color: #6a8759;">"Hack.txt"</span>,
+    <span style="color: #6a8759;">"extension"</span>: <span style="color: #6a8759;">".hackred"</span>
+}
+
+<span style="color: #629755; font-style: italic;"># [2] RECONOCIMIENTO DEL ENTORNO</span>
+<span style="color: #cc7832; font-weight: bold;">def</span> <span style="color: #ffc66d;">check_environment_lab</span>(): 
+    <span style="color: #629755; font-style: italic;"># Verifica que sea Windows y si hay depuradores activos (Técnica Anti-Análisis)</span>
+    <span style="color: #cc7832; font-weight: bold;">if</span> platform.system() == <span style="color: #6a8759;">"Windows"</span>: <span style="color: #cc7832; font-weight: bold;">pass</span>
+    <span style="color: #cc7832; font-weight: bold;">if</span> sys.gettrace() <span style="color: #cc7832; font-weight: bold;">is not None</span>: <span style="color: #cc7832; font-weight: bold;">pass</span> 
+
+<span style="color: #629755; font-style: italic;"># [3] DESCUBRIMIENTO DE ARCHIVOS</span>
+<span style="color: #cc7832; font-weight: bold;">def</span> <span style="color: #ffc66d;">discover_files</span>(base_path): 
+    <span style="color: #629755; font-style: italic;"># [ CENSORED: Rutina de iteración os.walk bloqueada ]</span>
+    <span style="color: #629755; font-style: italic;"># Escanea el sistema de archivos buscando coincidencias con las extensiones objetivo.</span>
+    <span style="color: #cc7832; font-weight: bold;">return</span> files_found 
+
+<span style="color: #629755; font-style: italic;"># [4] FASE DE ALTERACIÓN DE DATOS</span>
+<span style="color: #cc7832; font-weight: bold;">def</span> <span style="color: #ffc66d;">simulate_encryption</span>(file_path): 
+    <span style="color: #629755; font-style: italic;"># [ CENSORED POR POLÍTICAS DE SEGURIDAD ]</span>
+    <span style="color: #629755; font-style: italic;"># La lógica de lectura, alteración de bytes (Base64/Criptografía) </span>
+    <span style="color: #629755; font-style: italic;"># y sobrescritura de archivos ha sido removida para evitar uso malicioso.</span>
+    <span style="color: #cc7832; font-weight: bold;">pass</span>
+
+<span style="color: #629755; font-style: italic;"># [5] INTERFAZ DE EXTORSIÓN (LOCK SCREEN)</span>
+<span style="color: #cc7832; font-weight: bold;">def</span> <span style="color: #ffc66d;">mostrar_pantalla_bloqueo_fbi</span>(): 
+    <span style="color: #629755; font-style: italic;"># Genera una ventana persistente (Tkinter) a pantalla completa que simula un </span>
+    <span style="color: #629755; font-style: italic;"># bloqueo de autoridades federales para coaccionar a la víctima.</span>
+    root = tk.Tk()
+    root.attributes(<span style="color: #6a8759;">'-fullscreen'</span>, <span style="color: #cc7832; font-weight: bold;">True</span>)
+    root.protocol(<span style="color: #6a8759;">"WM_DELETE_WINDOW"</span>, <span style="color: #cc7832; font-weight: bold;">lambda</span>: <span style="color: #cc7832; font-weight: bold;">None</span>) <span style="color: #629755; font-style: italic;"># Bloquea cierre de ventana</span>
+    <span style="color: #629755; font-style: italic;"># ... (Código UI omitido por brevedad) ...</span>
+    root.mainloop()
+
+<span style="color: #cc7832; font-weight: bold;">if</span> __name__ == <span style="color: #6a8759;">"__main__"</span>:
+    <span style="color: #629755; font-style: italic;"># MAIN: Ejecuta la validación, busca la carpeta EMPRESA_DATOS,</span>
+    <span style="color: #629755; font-style: italic;"># despliega el secuestro y muestra la nota visual.</span>
+    main()
+</pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2><span class="prefix">#</span> 04_ANÁLISIS_DEL_CÓDIGO_DEFENSIVO_(DECRYPTOR)</h2>
+            <p style="margin-bottom: 20px; color: #ccc;">> La herramienta de descifrado permite recuperar el acceso a los datos si se posee la llave maestra. En entornos reales de criptografía asimétrica, esto equivale a obtener la Llave Privada RSA del atacante.</p>
+            
+            <div class="terminal-code-box">
+                <div class="terminal-header">
+                    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span style="margin-left: 10px;">Archivo: Decryptor_178991.py [CENSURADO]</span>
+                </div>
+                <div class="terminal-body" style="font-size: 0.85rem; max-height: 400px; overflow-y: auto;">
+<pre style="margin: 0; color: #a9b7c6; font-family: 'Share Tech Mono', monospace;">
+<span style="color: #629755; font-style: italic;"># Proyecto: Descryptor para RansomWare</span>
+
+<span style="color: #cc7832; font-weight: bold;">import</span> os, base64
+
+TARGET_DIR = os.path.join(os.environ.get(<span style="color: #6a8759;">'USERPROFILE'</span>), <span style="color: #6a8759;">'Desktop'</span>, <span style="color: #6a8759;">'EMPRESA_DATOS'</span>)
+EXTENSION_INFECTADA = <span style="color: #6a8759;">".hackred"</span>
+LLAVE_MAESTRA = <span style="color: #6a8759;">"HOUOUIN-178991"</span>
+
+<span style="color: #cc7832; font-weight: bold;">def</span> <span style="color: #ffc66d;">reverse_encryption</span>(file_path): 
+    <span style="color: #629755; font-style: italic;"># [ CENSORED POR POLÍTICAS DE SEGURIDAD ]</span>
+    <span style="color: #629755; font-style: italic;"># La lectura de archivos secuestrados, la aplicación del algoritmo inverso</span>
+    <span style="color: #629755; font-style: italic;"># y la restauración de los nombres originales ha sido abstraída.</span>
+    <span style="color: #cc7832; font-weight: bold;">pass</span>
+
+<span style="color: #cc7832; font-weight: bold;">def</span> <span style="color: #ffc66d;">main</span>():
+    <span style="color: #cc7832; font-weight: bold;">print</span>(<span style="color: #6a8759;">"========================================="</span>)
+    <span style="color: #cc7832; font-weight: bold;">print</span>(<span style="color: #6a8759;">"        HACKRED DECRYPTOR                "</span>)
+    <span style="color: #cc7832; font-weight: bold;">print</span>(<span style="color: #6a8759;">"========================================="</span>)
+
+    llave_usuario = <span style="color: #8888c6;">input</span>(<span style="color: #6a8759;">"Enter the key: "</span>)
+    
+    <span style="color: #629755; font-style: italic;"># Verifica la clave otorgada contra la firma autorizada.</span>
+    <span style="color: #cc7832; font-weight: bold;">if</span> llave_usuario != LLAVE_MAESTRA:
+        <span style="color: #cc7832; font-weight: bold;">print</span>(<span style="color: #6a8759;">"\n[!] INCORRECT KEY. FILES WILL REMAIN LOCKED."</span>)
+        <span style="color: #cc7832; font-weight: bold;">return</span>
+
+    <span style="color: #cc7832; font-weight: bold;">print</span>(<span style="color: #6a8759;">"\n[+] KEY VERIFIED. Initiating recovery protocol..."</span>)
+    
+    <span style="color: #629755; font-style: italic;"># Itera sobre los archivos afectados, los desencripta y limpia</span>
+    <span style="color: #629755; font-style: italic;"># la nota de rescate (Hack.txt) para restaurar el sistema.</span>
+    <span style="color: #629755; font-style: italic;"># ... (Lógica de limpieza omitida) ...</span>
+</pre>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <p class="copyright">
+                    © 2026 [Hououin] | CNO V SEGURIDAD INFORMÁTICA
+                </p>
+            </div>
+        </footer>
+
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>
